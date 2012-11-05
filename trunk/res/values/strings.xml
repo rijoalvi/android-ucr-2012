@@ -12,5 +12,6 @@
     <string name="title_section2">Section 2</string>
     <string name="title_section1">Enero</string>
     <string name="title_activity_swipoe_views">SwipoeViews</string>
+    <string name="title_activity_total_de_gastos">TotalDeGastos</string>
 
 </resources>
