@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="420dp"
+    android:orientation="horizontal"
+    android:weightSum="25" >
+    
+
+    <Button
+        android:id="@+id/DetalIngresos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_weight="5"
+        android:text="Home" />
+
+    <Button
+        android:id="@+id/DetalGastos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="10"
+        android:text="Agregar Ingreso" />
+
+    <Button
+        android:id="@+id/DetalGastos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:layout_weight="10"
+        android:text="Agregar Gasto" />
+
+</LinearLayout>
