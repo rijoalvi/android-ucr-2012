@@ -15,7 +15,7 @@
             android:id="@+id/ingresos"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"            
+            android:layout_marginLeft="10dp"
             android:layout_weight="50"
             android:text="@string/ingresos"
             android:textAppearance="?android:attr/textAppearanceMedium" />
@@ -34,16 +34,13 @@
         android:layout_width="fill_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="30dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal" >
 
         <ListView
-            android:id="@+id/timeline_list"
+            android:id="@+id/lista_gastos"
             android:layout_width="wrap_content"
-            android:layout_height="436dp"
-            android:layout_above="@+id/timeline_buttons"
-            android:layout_below="@+id/timeline_title" >
+            android:layout_height="436dp" >
         </ListView>
     </LinearLayout>
 
-   
 </RelativeLayout>
