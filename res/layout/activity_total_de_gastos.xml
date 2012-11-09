@@ -4,36 +4,15 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal"
-        android:weightSum="100" >
-
-        <TextView
-            android:id="@+id/ingresos"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_weight="50"
-            android:text="@string/ingresos"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <TextView
-            android:id="@+id/gastos"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:layout_weight="50"
-            android:text="@string/gastos"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-    </LinearLayout>
+    <include
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/barrasuperior" />
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="40dp"
         android:orientation="horizontal" >
 
         <ListView
@@ -42,5 +21,10 @@
             android:layout_height="436dp" >
         </ListView>
     </LinearLayout>
+
+    <include
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/barrainferior" />
 
 </RelativeLayout>

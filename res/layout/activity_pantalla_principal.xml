@@ -1,108 +1,105 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <LinearLayout
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="20" >
+        android:layout_height="match_parent"
+        android:layout_weight="0"
+        android:orientation="vertical" >
 
         <TextView
             android:id="@+id/ingresos"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="30dp"
-            android:layout_weight="10"
             android:text="@string/ingresos"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
-            android:id="@+id/respingresos"
-            android:layout_width="0dp"
+            android:id="@+id/montoIngresos"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="15dp"
             android:layout_marginTop="30dp"
-            android:layout_weight="10"
-            android:text="@string/ingresos"
+            android:text="@string/montoIngresos"
             android:textAppearance="?android:attr/textAppearanceMedium" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="20" >
 
         <TextView
             android:id="@+id/gastos"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/ingresos"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="30dp"
-            android:layout_weight="10"
             android:text="@string/gastos"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
-            android:id="@+id/respgastos"
-            android:layout_width="0dp"
+            android:id="@+id/montoGastos"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/ingresos"
+            android:layout_marginRight="15dp"
             android:layout_marginTop="30dp"
-            android:layout_weight="10"
-            android:text="@string/gastos"
+            android:text="@string/montoGastos"
             android:textAppearance="?android:attr/textAppearanceMedium" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="20" >
 
         <TextView
             android:id="@+id/disponible"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/gastos"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="30dp"
-            android:layout_weight="10"
             android:text="@string/disponible"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
-            android:id="@+id/respdisponible"
-            android:layout_width="0dp"
+            android:id="@+id/montoDisponible"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/gastos"
+            android:layout_marginRight="15dp"
             android:layout_marginTop="30dp"
-            android:layout_weight="10"
-            android:text="@string/disponible"
+            android:text="@string/montoDisponible"
             android:textAppearance="?android:attr/textAppearanceMedium" />
-    </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
-        android:orientation="horizontal"
-        android:weightSum="20" >
-
-        <Button
-            android:id="@+id/DetalIngresos"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:id="@+id/timeline_buttons"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_weight="10"
-            android:text="Detalle de Ingresos" />
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="60dp"
+            android:weightSum="100" >
 
-        <Button
-            android:id="@+id/DetalGastos"
-            android:layout_width="0dp"
+            <Button
+                android:id="@+id/DetalIngresos"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="50"
+                android:onClick="loadData"
+                android:text="Detalle de Ingresos" />
+
+            <Button
+                android:id="@+id/DetalGastos"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="50"
+                android:onClick="clearData"
+                android:text="Detalle de Gastos" />
+        </LinearLayout>
+
+        <include
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:layout_weight="10"
-            android:text="Detalle de Gastos" />
-    </LinearLayout>
+            layout="@layout/barrainferior" />
+    </RelativeLayout>
 
 </LinearLayout>
