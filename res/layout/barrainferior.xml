@@ -1,15 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/barraInferior"
-    android:orientation="vertical" >
 
-    <LinearLayout
-        android:id="@+id/footer_buttons"
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/barraInferior"
         android:layout_width="fill_parent"
         android:layout_height="35dp"
-        android:layout_alignParentBottom="true"
         android:layout_marginTop="5dp"
         android:padding="0dp"
         android:weightSum="99" >
@@ -39,4 +33,3 @@
             android:textSize="10dp" />
     </LinearLayout>
 
-</RelativeLayout>

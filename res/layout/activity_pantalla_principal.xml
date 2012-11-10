@@ -1,13 +1,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:weightSum="100" >
 
     <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="0"
+        android:layout_height="0dp"
+        android:layout_weight="80"
         android:orientation="vertical" >
 
         <TextView
@@ -17,7 +18,9 @@
             android:layout_marginLeft="15dp"
             android:layout_marginTop="30dp"
             android:text="@string/ingresos"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#005C1F"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/montoIngresos"
@@ -27,7 +30,9 @@
             android:layout_marginRight="15dp"
             android:layout_marginTop="30dp"
             android:text="@string/montoIngresos"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#005C1F"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/gastos"
@@ -37,7 +42,9 @@
             android:layout_marginLeft="15dp"
             android:layout_marginTop="30dp"
             android:text="@string/gastos"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#B20000"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/montoGastos"
@@ -48,7 +55,9 @@
             android:layout_marginRight="15dp"
             android:layout_marginTop="30dp"
             android:text="@string/montoGastos"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#B20000"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/disponible"
@@ -58,7 +67,9 @@
             android:layout_marginLeft="15dp"
             android:layout_marginTop="30dp"
             android:text="@string/disponible"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#0000B8"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/montoDisponible"
@@ -69,37 +80,38 @@
             android:layout_marginRight="15dp"
             android:layout_marginTop="30dp"
             android:text="@string/montoDisponible"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <LinearLayout
-            android:id="@+id/timeline_buttons"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="60dp"
-            android:weightSum="100" >
-
-            <Button
-                android:id="@+id/DetalIngresos"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="50"
-                android:onClick="loadData"
-                android:text="Detalle de Ingresos" />
-
-            <Button
-                android:id="@+id/DetalGastos"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="50"
-                android:onClick="clearData"
-                android:text="Detalle de Gastos" />
-        </LinearLayout>
-
-        <include
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            layout="@layout/barrainferior" />
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#0000B8"
+            android:textStyle="bold" />
     </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/timeline_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="20"
+        android:weightSum="100" >
+
+        <Button
+            android:id="@+id/DetalIngresos"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="50"
+            android:onClick="loadData"
+            android:text="Detalle de Ingresos" />
+
+        <Button
+            android:id="@+id/DetalGastos"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="50"
+            android:onClick="clearData"
+            android:text="Detalle de Gastos" />
+    </LinearLayout>
+
+    <include
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/barrainferior" />
 
 </LinearLayout>
