@@ -17,7 +17,10 @@
     <string name="title_activity_total_de_gastos">TotalDeGastos</string>
     <string name="title_activity_total_de_ingresos">TotalDeIngresos</string>
     <string name="menos">-</string>
-    
-    
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_categoria_gasto">Seleccione una Categoría de gasto</string>
+    <string name="title_activity_categoria_ingreso">Seleccione una categoría de ingreso</string>
+    <string name="title_activity_detalles_ingreso">Ingrese los detalles del Ingreso</string>
+    <string name="title_activity_detalles_gasto">Ingrese los detalles del Gasto</string>
 
 </resources>
