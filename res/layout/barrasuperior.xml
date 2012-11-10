@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/barraSuperior"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentTop="true"
+    android:layout_marginBottom="5dp"
+    android:background="#808080"
+    android:gravity="center"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/header_labels"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingLeft="30dp"
+        android:weightSum="100" >
+
+        <TextView
+            android:id="@+id/ingresos_header_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="50"
+            android:text="@string/ingresos"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#005C1F" />
+
+        <TextView
+            android:id="@+id/gastos_header_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_weight="50"
+            android:text="@string/gastos"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#B20000" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/monto_header_labels"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingLeft="30dp"
+        android:weightSum="100" >
+
+        <TextView
+            android:id="@+id/monto_ingresos_header_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="50"
+            android:text="@string/montoIngresos"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#005C1F" />
+
+        <TextView
+            android:id="@+id/monto_gastos_header_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_weight="50"
+            android:text="@string/montoGastos"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#B20000" />
+    </LinearLayout>
+
+</LinearLayout>

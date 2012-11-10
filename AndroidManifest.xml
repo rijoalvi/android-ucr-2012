@@ -20,7 +20,7 @@
             android:label="@string/title_activity_pantalla_principal" >
         </activity>
         <activity
-            android:name=".SwipoeViews"
+            android:name=".MoneyOrganizer"
             android:label="@string/title_activity_swipoe_views" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,6 +35,42 @@
         <activity
             android:name=".TotalDeIngresos"
             android:label="@string/title_activity_total_de_ingresos" >
+        </activity>
+        <activity
+            android:name=".CategoriaGasto"
+            android:label="@string/title_activity_categoria_gasto" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".CategoriaIngreso"
+            android:label="@string/title_activity_categoria_ingreso" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".DetallesIngreso"
+            android:label="@string/title_activity_detalles_ingreso" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".DetallesGasto"
+            android:label="@string/title_activity_detalles_gasto" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 
