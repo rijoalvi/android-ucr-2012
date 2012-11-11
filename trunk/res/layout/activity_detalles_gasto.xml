@@ -49,7 +49,7 @@
         <EditText
             android:id="@+id/detalles_gasto_monto"
             android:layout_width="0dp"
-            android:layout_height="35dp"
+            android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
             android:layout_weight="5"
             android:gravity="center"
@@ -79,7 +79,7 @@
         <EditText
             android:id="@+id/detalles_gasto_lugar"
             android:layout_width="0dp"
-            android:layout_height="35dp"
+            android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
             android:layout_weight="5"
             android:gravity="center"

@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 public class OpenHelper extends SQLiteOpenHelper implements ConstantesBD {
-	private static final int DATABASE_VERSION = 3;
+	private static final int DATABASE_VERSION = 1;
 	private static final String DATABASE_NAME = "moneyorganizer.db";
 
 	public OpenHelper(Context context) {
@@ -24,7 +24,7 @@ public class OpenHelper extends SQLiteOpenHelper implements ConstantesBD {
 				+ ColumnaIngresos.ANIO + " INTEGER, "
 				+ ColumnaIngresos.MONTO + " INTEGER, "
 				+ ColumnaIngresos.FUENTE + " TEXT, "
-				+ ColumnaIngresos.DETALLE + " TEXT, " + ")");
+				+ ColumnaIngresos.DETALLE + " TEXT" + ")");
 		Log.d("", "Columna de ingresos creada");
 		
 		db.execSQL("CREATE TABLE " + TABLA_GASTOS + " ( "
@@ -36,7 +36,7 @@ public class OpenHelper extends SQLiteOpenHelper implements ConstantesBD {
 				+ ColumnaGastos.ANIO + " INTEGER, "
 				+ ColumnaGastos.MONTO + " INTEGER, "
 				+ ColumnaGastos.LUGAR + " TEXT, "
-				+ ColumnaGastos.DETALLE + " TEXT, " + ")");
+				+ ColumnaGastos.DETALLE + " TEXT" + ")");
 		Log.d("", "Columna de gastos creada");
 		Log.d("", "Base de datos creada");
 		
