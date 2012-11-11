@@ -127,6 +127,6 @@ public class SwipoeViews extends FragmentActivity {
         View rootView = inflater.inflate(tabLayout, container, false);
  
         return rootView;
-    }
-    }
+		}
+	}
 }

@@ -1,35 +1,27 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/barraInferior"
+    android:layout_width="fill_parent"
+    android:layout_height="35dp"
+    android:layout_marginTop="5dp"
+    android:padding="0dp"
+    android:weightSum="10" >
 
+    <Button
+        android:id="@+id/boton_agregar_gasto"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="5"
+        android:onClick="agregarGasto"
+        android:text="Agregar Gasto"
+        android:textSize="10dp" />
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/barraInferior"
-        android:layout_width="fill_parent"
-        android:layout_height="35dp"
-        android:layout_marginTop="5dp"
-        android:padding="0dp"
-        android:weightSum="99" >
+    <Button
+        android:id="@+id/boton_agregar_ingreso"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="5"
+        android:onClick="agregarIngreso"
+        android:text="Agregar Ingreso"
+        android:textSize="10dp" />
 
-        <Button
-            android:id="@+id/DetalIngresos"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="33"
-            android:text="Home"
-            android:textSize="10dp" />
-
-        <Button
-            android:id="@+id/DetalGastos"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="33"
-            android:text="Agregar Ingreso"
-            android:textSize="10dp" />
-
-        <Button
-            android:id="@+id/DetalGastos"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="33"
-            android:text="Agregar Gasto"
-            android:textSize="10dp" />
-    </LinearLayout>
-
+</LinearLayout>

@@ -8,7 +8,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="80"
+        android:layout_weight="100"
         android:orientation="vertical" >
 
         <TextView
@@ -64,6 +64,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/gastos"
+            android:layout_marginBottom="60dp"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="30dp"
             android:text="@string/disponible"
@@ -77,37 +78,22 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_below="@id/gastos"
+            android:layout_marginBottom="60dp"
             android:layout_marginRight="15dp"
             android:layout_marginTop="30dp"
             android:text="@string/montoDisponible"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="#0000B8"
             android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/boton_detalles"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/disponible"
+            android:onClick="cargarDetalles"
+            android:text="Ver Detalles" />
     </RelativeLayout>
-
-    <LinearLayout
-        android:id="@+id/timeline_buttons"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="20"
-        android:weightSum="100" >
-
-        <Button
-            android:id="@+id/DetalIngresos"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="50"
-            android:onClick="loadData"
-            android:text="Detalle de Ingresos" />
-
-        <Button
-            android:id="@+id/DetalGastos"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="50"
-            android:onClick="clearData"
-            android:text="Detalle de Gastos" />
-    </LinearLayout>
 
     <include
         android:layout_width="fill_parent"

@@ -13,7 +13,7 @@
     <string name="title_section3">Section 3</string>
     <string name="title_section2">Section 2</string>
     <string name="title_section1">Enero</string>
-    <string name="title_activity_swipoe_views">SwipoeViews</string>
+    <string name="title_activity_swipoe_views">Money Organizer</string>
     <string name="title_activity_total_de_gastos">TotalDeGastos</string>
     <string name="title_activity_total_de_ingresos">TotalDeIngresos</string>
     <string name="menos">-</string>
@@ -22,5 +22,6 @@
     <string name="title_activity_categoria_ingreso">Seleccione una categoría de ingreso</string>
     <string name="title_activity_detalles_ingreso">Ingrese los detalles del Ingreso</string>
     <string name="title_activity_detalles_gasto">Ingrese los detalles del Gasto</string>
+    <string name="title_activity_barra_inferior">BarraInferior</string>
 
 </resources>
