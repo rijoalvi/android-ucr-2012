@@ -261,7 +261,7 @@ public class ControladorBD implements ConstantesBD {
 	public Gasto getGasto(int id) {
 		Gasto gasto = null;
 		SQLiteDatabase db = openHelper.getReadableDatabase();
-		Cursor cursor = db.query(TABLA_INGRESOS, new String[] {
+		Cursor cursor = db.query(TABLA_GASTOS, new String[] {
 				ColumnaGastos.ID, ColumnaGastos.TIPO, ColumnaGastos.FECHA,
 				ColumnaGastos.DIA, ColumnaGastos.MES,
 				ColumnaGastos.ANIO, ColumnaGastos.MONTO,
@@ -303,7 +303,7 @@ public class ControladorBD implements ConstantesBD {
 //	public List<Gasto> getTodosLosGastosDelDia(int dia, int mes, int anio) {
 //		List<Gasto> gastos = new ArrayList<Gasto>();
 //		SQLiteDatabase db = openHelper.getReadableDatabase();
-//		Cursor cursor = db.query(TABLA_INGRESOS, new String[] {
+//		Cursor cursor = db.query(TABLA_GASTOS, new String[] {
 //				ColumnaGastos.ID, ColumnaGastos.TIPO, ColumnaGastos.FECHA,
 //				ColumnaGastos.DIA, ColumnaGastos.MES,
 //				ColumnaGastos.ANIO, ColumnaGastos.MONTO,
@@ -348,7 +348,7 @@ public class ControladorBD implements ConstantesBD {
 //	public List<Gasto> getTodosLosGastosDelMes(int mes, int anio) {
 //		List<Gasto> gastos = new ArrayList<Gasto>();
 //		SQLiteDatabase db = openHelper.getReadableDatabase();
-//		Cursor cursor = db.query(TABLA_INGRESOS, new String[] {
+//		Cursor cursor = db.query(TABLA_GASTOS, new String[] {
 //				ColumnaGastos.ID, ColumnaGastos.TIPO, ColumnaGastos.FECHA,
 //				ColumnaGastos.DIA, ColumnaGastos.MES,
 //				ColumnaGastos.ANIO, ColumnaGastos.MONTO,
@@ -393,7 +393,7 @@ public class ControladorBD implements ConstantesBD {
 	public List<Gasto> getTodosLosGastos() {
 		List<Gasto> gastos = new ArrayList<Gasto>();
 		SQLiteDatabase db = openHelper.getReadableDatabase();
-		Cursor cursor = db.query(TABLA_INGRESOS, new String[] {
+		Cursor cursor = db.query(TABLA_GASTOS, new String[] {
 				ColumnaGastos.ID, ColumnaGastos.TIPO, ColumnaGastos.FECHA,
 				ColumnaGastos.DIA, ColumnaGastos.MES,
 				ColumnaGastos.ANIO, ColumnaGastos.MONTO,
@@ -436,7 +436,7 @@ public class ControladorBD implements ConstantesBD {
 	public boolean guardarGasto(Gasto gasto) {
 		SQLiteDatabase db = openHelper.getWritableDatabase();
 
-		long id = db.insert(TABLA_INGRESOS, null, gasto.getValues());
+		long id = db.insert(TABLA_GASTOS, null, gasto.getValues());
 
 		if (id != -1) {
 			Log.d("", "Datos insertados");
@@ -449,7 +449,7 @@ public class ControladorBD implements ConstantesBD {
 
 //	public void actualizarGasto(Gasto gasto) {
 //		SQLiteDatabase db = openHelper.getWritableDatabase();
-//		int affectedRows = db.update(TABLA_INGRESOS, gasto.getValues(),
+//		int affectedRows = db.update(TABLA_GASTOS, gasto.getValues(),
 //				SongColumns.TRACKID + " = ?",
 //				new String[] { String.valueOf(gasto.getTrackId()) });
 //		if (affectedRows > 0) {
@@ -465,7 +465,7 @@ public class ControladorBD implements ConstantesBD {
 	 */
 	public boolean borrarGasto(Gasto gasto) {
 		SQLiteDatabase db = openHelper.getWritableDatabase();
-		int affectedRows = db.delete(TABLA_INGRESOS, ColumnaGastos.ID
+		int affectedRows = db.delete(TABLA_GASTOS, ColumnaGastos.ID
 				+ " = ?", new String[] { String.valueOf(gasto.getId()) });
 		if (affectedRows > 0) {
 			Log.d("", "Datos borrados");
