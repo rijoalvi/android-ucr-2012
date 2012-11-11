@@ -1,5 +1,8 @@
 package com.moneyorganizer;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -7,6 +10,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -128,4 +132,44 @@ public class MoneyOrganizer extends FragmentActivity {
 			return rootView;
 		}
 	}
+
+//	public void cargarListaIngresos(View view) {
+//		startActivity(new Intent(getApplicationContext(), TotalDeIngresos.class));
+//		// finish();
+//	}
+//
+//	public void cargarListaGastos(View view) {
+//		startActivity(new Intent(getApplicationContext(), TotalDeGastos.class));
+//		// finish();
+//	}
+
+	@SuppressWarnings("deprecation")
+	public void cargarDetalles(View view) {
+		AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+		alertDialog.setTitle("Detalles");
+		alertDialog.setMessage("Seleccione una categor’a de detalles:");
+		// alertDialog.setIcon(R.drawable.search);
+		alertDialog.setButton("Gasto", new DialogInterface.OnClickListener() {
+			public void onClick(final DialogInterface dialog, final int which) {
+				startActivity(new Intent(getApplicationContext(), TotalDeGastos.class));
+				return;
+			}
+		});
+		alertDialog.setButton2("Ingreso", new DialogInterface.OnClickListener() {
+			public void onClick(final DialogInterface dialog, final int which) {
+				startActivity(new Intent(getApplicationContext(), TotalDeIngresos.class));
+				return;
+			}
+		});
+		alertDialog.show();
+	}
+	
+	public void agregarIngreso(View view){
+		startActivity(new Intent(getApplicationContext(), CategoriaIngreso.class));
+	}
+	
+	public void agregarGasto(View view){
+		startActivity(new Intent(getApplicationContext(), CategoriaGasto.class));
+	}
+	
 }

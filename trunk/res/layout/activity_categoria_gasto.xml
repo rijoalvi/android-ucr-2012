@@ -9,12 +9,13 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="20dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="25dp"
+        android:layout_marginTop="10dp"
         android:gravity="center"
         android:text="Seleccione una categoría de Gasto"
-        android:layout_marginBottom="5dp"
-        android:textStyle="bold"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -35,12 +36,14 @@
                 android:layout_width="75dp"
                 android:layout_height="75dp"
                 android:layout_marginLeft="15dp"
-                android:background="#cccccc" />
+                android:background="#cccccc"
+                android:onClick="gastoTransporte" />
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="20dp"
+                android:layout_height="wrap_content"
                 android:gravity="center"
+                android:onClick="gastoTransporte"
                 android:text="Transporte"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
         </LinearLayout>
@@ -57,12 +60,14 @@
                 android:layout_width="75dp"
                 android:layout_height="75dp"
                 android:layout_marginLeft="15dp"
-                android:background="#cccccc" />
+                android:background="#cccccc"
+                android:onClick="gastoServicios" />
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="20dp"
+                android:layout_height="wrap_content"
                 android:gravity="center"
+                android:onClick="gastoServicios"
                 android:text="Servicios"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
         </LinearLayout>
@@ -79,11 +84,13 @@
                 android:layout_width="75dp"
                 android:layout_height="75dp"
                 android:layout_marginLeft="15dp"
-                android:background="#cccccc" />
+                android:background="#cccccc"
+                android:onClick="gastoAlimentacion" />
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="20dp"
+                android:layout_height="wrap_content"
+                gastoAlimentacion=""
                 android:gravity="center"
                 android:text="Alimentación"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
@@ -109,12 +116,14 @@
                 android:layout_width="75dp"
                 android:layout_height="75dp"
                 android:layout_marginLeft="15dp"
-                android:background="#cccccc" />
+                android:background="#cccccc"
+                android:onClick="gastoRecreacion" />
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="20dp"
+                android:layout_height="wrap_content"
                 android:gravity="center"
+                android:onClick="gastoRecreacion"
                 android:text="Recreación"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
         </LinearLayout>
@@ -131,12 +140,14 @@
                 android:layout_width="75dp"
                 android:layout_height="75dp"
                 android:layout_marginLeft="15dp"
-                android:background="#cccccc" />
+                android:background="#cccccc"
+                android:onClick="gastoTecnologia" />
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="20dp"
+                android:layout_height="wrap_content"
                 android:gravity="center"
+                android:onClick="gastoTecnologia"
                 android:text="Tecnología"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
         </LinearLayout>
@@ -153,12 +164,14 @@
                 android:layout_width="75dp"
                 android:layout_height="75dp"
                 android:layout_marginLeft="15dp"
-                android:background="#cccccc" />
+                android:background="#cccccc"
+                android:onClick="gastoRopa" />
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="20dp"
+                android:layout_height="wrap_content"
                 android:gravity="center"
+                android:onClick="gastoRopa"
                 android:text="Ropa"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
         </LinearLayout>
@@ -183,12 +196,14 @@
                 android:layout_width="75dp"
                 android:layout_height="75dp"
                 android:layout_marginLeft="15dp"
-                android:background="#cccccc" />
+                android:background="#cccccc"
+                android:onClick="gastoImpuestos" />
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="20dp"
+                android:layout_height="wrap_content"
                 android:gravity="center"
+                android:onClick="gastoImpuestos"
                 android:text="Impuestos"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
         </LinearLayout>
@@ -205,12 +220,14 @@
                 android:layout_width="75dp"
                 android:layout_height="75dp"
                 android:layout_marginLeft="15dp"
-                android:background="#cccccc" />
+                android:background="#cccccc"
+                android:onClick="gastoRegalos" />
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="20dp"
+                android:layout_height="wrap_content"
                 android:gravity="center"
+                android:onClick="gastoRegalos"
                 android:text="Regalos"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
         </LinearLayout>
@@ -227,17 +244,17 @@
                 android:layout_width="75dp"
                 android:layout_height="75dp"
                 android:layout_marginLeft="15dp"
-                android:background="#cccccc" />
+                android:background="#cccccc"
+                android:onClick="gastoOtros" />
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="20dp"
+                android:layout_height="wrap_content"
                 android:gravity="center"
+                android:onClick="gastoOtros"
                 android:text="Otros"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
         </LinearLayout>
     </LinearLayout>
-
-    <include layout="@layout/barrainferior" />
 
 </LinearLayout>

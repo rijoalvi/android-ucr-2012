@@ -1,7 +1,7 @@
 package com.moneyorganizer.conexion;
+import com.moneyorganizer.conexion.DataParser;
 
 public class XPPDataParser implements DataParser {
-	@Override
 	public TipoCambio parseUser(char[] in) {
 		TipoCambio tipoCambio = new TipoCambio();
         String s=new String(in);
