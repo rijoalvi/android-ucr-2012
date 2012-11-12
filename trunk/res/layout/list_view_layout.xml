@@ -7,7 +7,7 @@
     android:weightSum="100" >
 
     <ImageView
-        android:id="@+id/song_image"
+        android:id="@+id/imagen"
         android:layout_width="75dp"
         android:layout_height="75dp"
         android:background="#cccccc" />
@@ -18,19 +18,27 @@
         android:layout_gravity="center_vertical"
         android:layout_weight="65"
         android:orientation="vertical"
-        android:padding="8dp" >
+        android:padding="4dp" >
 
         <TextView
-            android:id="@+id/song_title"
+            android:id="@+id/lugar_fuente"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="marquee"
+            android:singleLine="true"
+            android:text="Large Text"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <TextView
+            android:id="@+id/monto"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ellipsize="marquee"
             android:singleLine="true"
             android:text="Medium Text"
             android:textAppearance="?android:attr/textAppearanceMedium" />
-
         <TextView
-            android:id="@+id/artist_name"
+            android:id="@+id/fecha"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ellipsize="marquee"
