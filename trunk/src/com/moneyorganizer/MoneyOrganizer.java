@@ -1,5 +1,8 @@
 package com.moneyorganizer;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -147,17 +150,33 @@ public class MoneyOrganizer extends FragmentActivity {
 	public void cargarDetalles(View view) {
 		AlertDialog alertDialog = new AlertDialog.Builder(this).create();
 		alertDialog.setTitle("Detalles");
-		alertDialog.setMessage("Seleccione una categor’a de detalles:");
+		alertDialog.setMessage("Seleccione una categoría de detalles:");
 		// alertDialog.setIcon(R.drawable.search);
 		alertDialog.setButton("Gasto", new DialogInterface.OnClickListener() {
 			public void onClick(final DialogInterface dialog, final int which) {
-				startActivity(new Intent(getApplicationContext(), TotalDeGastos.class));
+				Intent intento = new Intent(getApplicationContext(), TotalDeGastos.class);
+				intento.putExtra("categoria", "1");
+				startActivity(intento);
 				return;
 			}
 		});
 		alertDialog.setButton2("Ingreso", new DialogInterface.OnClickListener() {
 			public void onClick(final DialogInterface dialog, final int which) {
-				startActivity(new Intent(getApplicationContext(), TotalDeIngresos.class));
+				
+				Intent intento = new Intent(getApplicationContext(), TotalDeIngresos.class);
+				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				Date date = new Date();
+				String fecha = null;
+				fecha = dateFormat.format(date);
+				String temp[] = fecha.split(" ");
+				String fechaDigitos[] = null;
+				String horaDigitos[] = null;
+				if (temp.length > 1) {
+					fechaDigitos = temp[0].split("-");
+				intento.putExtra("mes", Integer.parseInt(temp[1]));
+				intento.putExtra("anio", Integer.parseInt(temp[2]));
+				startActivity(intento);
+				}
 				return;
 			}
 		});

@@ -73,89 +73,89 @@ public class ControladorBD implements ConstantesBD {
 	 * @param int dia, int mes, int anio
 	 * @return List<Ingreso>
 	 */
-//	public List<Ingreso> getTodosLosIngresosDelDia(int dia, int mes, int anio) {
-//		List<Ingreso> ingresos = new ArrayList<Ingreso>();
-//		SQLiteDatabase db = openHelper.getReadableDatabase();
-//		Cursor cursor = db.query(TABLA_INGRESOS, new String[] {
-//				ColumnaIngresos.ID, ColumnaIngresos.TIPO, ColumnaIngresos.FECHA,
-//				ColumnaIngresos.DIA, ColumnaIngresos.MES,
-//				ColumnaIngresos.ANIO, ColumnaIngresos.MONTO,
-//				ColumnaIngresos.FUENTE, ColumnaIngresos.DETALLE }, ColumnaIngresos.DIA + " = ? AND "+ColumnaIngresos.MES + "= ? AND "+ ColumnaIngresos.ANIO + "= ?",
-//				new String[] { String.valueOf(dia), String.valueOf(mes), String.valueOf(anio) }, null, null, null);
-//		if (cursor.moveToFirst()) {
-//			do {
-//				int idIngreso = Integer.parseInt(cursor.getString(cursor
-//						.getColumnIndex(ColumnaIngresos.ID)));
-//				int tipoIngreso = Integer.parseInt(cursor.getString(cursor
-//						.getColumnIndex(ColumnaIngresos.TIPO)));
-//				String fechaIngreso = cursor.getString(cursor
-//						.getColumnIndex(ColumnaIngresos.FECHA));
-//				int diaIngreso = Integer.parseInt(cursor.getString(cursor
-//						.getColumnIndex(ColumnaIngresos.DIA)));
-//				int mesIngreso = Integer.parseInt(cursor.getString(cursor
-//						.getColumnIndex(ColumnaIngresos.MES)));
-//				int anioIngreso = Integer.parseInt(cursor.getString(cursor
-//						.getColumnIndex(ColumnaIngresos.ANIO)));
-//				int montoIngreso = Integer.parseInt(cursor.getString(cursor
-//						.getColumnIndex(ColumnaIngresos.MONTO)));
-//				String fuenteIngreso = cursor.getString(cursor
-//						.getColumnIndex(ColumnaIngresos.FUENTE));
-//				String detalleIngreso = cursor.getString(cursor
-//						.getColumnIndex(ColumnaIngresos.DETALLE));
-//				Ingreso ingreso = new Ingreso(idIngreso, tipoIngreso, fechaIngreso, diaIngreso,
-//						mesIngreso, anioIngreso, montoIngreso, fuenteIngreso, detalleIngreso);
-//				ingresos.add(ingreso);
-//			} while (cursor.moveToNext());
-//		}
-//		cursor.close();
-//		db.close();
-//		return ingresos;
-//	}
-//	
+	public List<Ingreso> getTodosLosIngresosDelDia(int dia, int mes, int anio) {
+		List<Ingreso> ingresos = new ArrayList<Ingreso>();
+		SQLiteDatabase db = openHelper.getReadableDatabase();
+		Cursor cursor = db.query(TABLA_INGRESOS, new String[] {
+				ColumnaIngresos.ID, ColumnaIngresos.TIPO, ColumnaIngresos.FECHA,
+				ColumnaIngresos.DIA, ColumnaIngresos.MES,
+				ColumnaIngresos.ANIO, ColumnaIngresos.MONTO,
+				ColumnaIngresos.FUENTE, ColumnaIngresos.DETALLE }, ColumnaIngresos.DIA + " = ? AND "+ColumnaIngresos.MES + "= ? AND "+ ColumnaIngresos.ANIO + "= ?",
+				new String[] { String.valueOf(dia), String.valueOf(mes), String.valueOf(anio) }, null, null, null);
+		if (cursor.moveToFirst()) {
+			do {
+				int idIngreso = Integer.parseInt(cursor.getString(cursor
+						.getColumnIndex(ColumnaIngresos.ID)));
+				int tipoIngreso = Integer.parseInt(cursor.getString(cursor
+						.getColumnIndex(ColumnaIngresos.TIPO)));
+				String fechaIngreso = cursor.getString(cursor
+						.getColumnIndex(ColumnaIngresos.FECHA));
+				int diaIngreso = Integer.parseInt(cursor.getString(cursor
+						.getColumnIndex(ColumnaIngresos.DIA)));
+				int mesIngreso = Integer.parseInt(cursor.getString(cursor
+						.getColumnIndex(ColumnaIngresos.MES)));
+				int anioIngreso = Integer.parseInt(cursor.getString(cursor
+						.getColumnIndex(ColumnaIngresos.ANIO)));
+				int montoIngreso = Integer.parseInt(cursor.getString(cursor
+						.getColumnIndex(ColumnaIngresos.MONTO)));
+				String fuenteIngreso = cursor.getString(cursor
+						.getColumnIndex(ColumnaIngresos.FUENTE));
+				String detalleIngreso = cursor.getString(cursor
+						.getColumnIndex(ColumnaIngresos.DETALLE));
+				Ingreso ingreso = new Ingreso(idIngreso, tipoIngreso, fechaIngreso, diaIngreso,
+						mesIngreso, anioIngreso, montoIngreso, fuenteIngreso, detalleIngreso);
+				ingresos.add(ingreso);
+			} while (cursor.moveToNext());
+		}
+		cursor.close();
+		db.close();
+		return ingresos;
+	}
+	
 	
 	/**
 	 * @description Retorna los ingresos del mes seleccionado (mes anio) 
 	 * @param int mes, int anio
 	 * @return List<Ingreso>
 	 */
-//	public List<Ingreso> getTodosLosIngresosDelMes(int mes, int anio) {
-//		List<Ingreso> ingresos = new ArrayList<Ingreso>();
-//		SQLiteDatabase db = openHelper.getReadableDatabase();
-//		Cursor cursor = db.query(TABLA_INGRESOS, new String[] {
-//				ColumnaIngresos.ID, ColumnaIngresos.TIPO, ColumnaIngresos.FECHA,
-//				ColumnaIngresos.DIA, ColumnaIngresos.MES,
-//				ColumnaIngresos.ANIO, ColumnaIngresos.MONTO,
-//				ColumnaIngresos.FUENTE, ColumnaIngresos.DETALLE }, ColumnaIngresos.MES + "= ? AND "+ ColumnaIngresos.ANIO + "= ?",
-//				new String[] { String.valueOf(mes), String.valueOf(anio) }, null, null, null);
-//		if (cursor.moveToFirst()) {
-//			do {
-//				int idIngreso = Integer.parseInt(cursor.getString(cursor
-//						.getColumnIndex(ColumnaIngresos.ID)));
-//				int tipoIngreso = Integer.parseInt(cursor.getString(cursor
-//						.getColumnIndex(ColumnaIngresos.TIPO)));
-//				String fechaIngreso = cursor.getString(cursor
-//						.getColumnIndex(ColumnaIngresos.FECHA));
-//				int diaIngreso = Integer.parseInt(cursor.getString(cursor
-//						.getColumnIndex(ColumnaIngresos.DIA)));
-//				int mesIngreso = Integer.parseInt(cursor.getString(cursor
-//						.getColumnIndex(ColumnaIngresos.MES)));
-//				int anioIngreso = Integer.parseInt(cursor.getString(cursor
-//						.getColumnIndex(ColumnaIngresos.ANIO)));
-//				int montoIngreso = Integer.parseInt(cursor.getString(cursor
-//						.getColumnIndex(ColumnaIngresos.MONTO)));
-//				String fuenteIngreso = cursor.getString(cursor
-//						.getColumnIndex(ColumnaIngresos.FUENTE));
-//				String detalleIngreso = cursor.getString(cursor
-//						.getColumnIndex(ColumnaIngresos.DETALLE));
-//				Ingreso ingreso = new Ingreso(idIngreso, tipoIngreso, fechaIngreso, diaIngreso,
-//						mesIngreso, anioIngreso, montoIngreso, fuenteIngreso, detalleIngreso);
-//				ingresos.add(ingreso);
-//			} while (cursor.moveToNext());
-//		}
-//		cursor.close();
-//		db.close();
-//		return ingresos;
-//	}
+	public List<Ingreso> getTodosLosIngresosDelMes(int mes, int anio) {
+		List<Ingreso> ingresos = new ArrayList<Ingreso>();
+		SQLiteDatabase db = openHelper.getReadableDatabase();
+		Cursor cursor = db.query(TABLA_INGRESOS, new String[] {
+				ColumnaIngresos.ID, ColumnaIngresos.TIPO, ColumnaIngresos.FECHA,
+				ColumnaIngresos.DIA, ColumnaIngresos.MES,
+				ColumnaIngresos.ANIO, ColumnaIngresos.MONTO,
+				ColumnaIngresos.FUENTE, ColumnaIngresos.DETALLE }, ColumnaIngresos.MES + "= ? AND "+ ColumnaIngresos.ANIO + "= ?",
+				new String[] { String.valueOf(mes), String.valueOf(anio) }, null, null, null);
+		if (cursor.moveToFirst()) {
+			do {
+				int idIngreso = Integer.parseInt(cursor.getString(cursor
+						.getColumnIndex(ColumnaIngresos.ID)));
+				int tipoIngreso = Integer.parseInt(cursor.getString(cursor
+						.getColumnIndex(ColumnaIngresos.TIPO)));
+				String fechaIngreso = cursor.getString(cursor
+						.getColumnIndex(ColumnaIngresos.FECHA));
+				int diaIngreso = Integer.parseInt(cursor.getString(cursor
+						.getColumnIndex(ColumnaIngresos.DIA)));
+				int mesIngreso = Integer.parseInt(cursor.getString(cursor
+						.getColumnIndex(ColumnaIngresos.MES)));
+				int anioIngreso = Integer.parseInt(cursor.getString(cursor
+						.getColumnIndex(ColumnaIngresos.ANIO)));
+				int montoIngreso = Integer.parseInt(cursor.getString(cursor
+						.getColumnIndex(ColumnaIngresos.MONTO)));
+				String fuenteIngreso = cursor.getString(cursor
+						.getColumnIndex(ColumnaIngresos.FUENTE));
+				String detalleIngreso = cursor.getString(cursor
+						.getColumnIndex(ColumnaIngresos.DETALLE));
+				Ingreso ingreso = new Ingreso(idIngreso, tipoIngreso, fechaIngreso, diaIngreso,
+						mesIngreso, anioIngreso, montoIngreso, fuenteIngreso, detalleIngreso);
+				ingresos.add(ingreso);
+			} while (cursor.moveToNext());
+		}
+		cursor.close();
+		db.close();
+		return ingresos;
+	}
 	
 	
 
@@ -300,89 +300,89 @@ public class ControladorBD implements ConstantesBD {
 	 * @param int dia, int mes, int anio
 	 * @return List<Gasto>
 	 */
-//	public List<Gasto> getTodosLosGastosDelDia(int dia, int mes, int anio) {
-//		List<Gasto> gastos = new ArrayList<Gasto>();
-//		SQLiteDatabase db = openHelper.getReadableDatabase();
-//		Cursor cursor = db.query(TABLA_GASTOS, new String[] {
-//				ColumnaGastos.ID, ColumnaGastos.TIPO, ColumnaGastos.FECHA,
-//				ColumnaGastos.DIA, ColumnaGastos.MES,
-//				ColumnaGastos.ANIO, ColumnaGastos.MONTO,
-//				ColumnaGastos.LUGAR, ColumnaGastos.DETALLE }, ColumnaGastos.DIA + " = ? AND "+ColumnaGastos.MES + "= ? AND "+ ColumnaGastos.ANIO + "= ?",
-//				new String[] { String.valueOf(dia), String.valueOf(mes), String.valueOf(anio) }, null, null, null);
-//		if (cursor.moveToFirst()) {
-//			do {
-//				int idGasto = Integer.parseInt(cursor.getString(cursor
-//						.getColumnIndex(ColumnaGastos.ID)));
-//				int tipoGasto = Integer.parseInt(cursor.getString(cursor
-//						.getColumnIndex(ColumnaGastos.TIPO)));
-//				String fechaGasto = cursor.getString(cursor
-//						.getColumnIndex(ColumnaGastos.FECHA));
-//				int diaGasto = Integer.parseInt(cursor.getString(cursor
-//						.getColumnIndex(ColumnaGastos.DIA)));
-//				int mesGasto = Integer.parseInt(cursor.getString(cursor
-//						.getColumnIndex(ColumnaGastos.MES)));
-//				int anioGasto = Integer.parseInt(cursor.getString(cursor
-//						.getColumnIndex(ColumnaGastos.ANIO)));
-//				int montoGasto = Integer.parseInt(cursor.getString(cursor
-//						.getColumnIndex(ColumnaGastos.MONTO)));
-//				String lugarGasto = cursor.getString(cursor
-//						.getColumnIndex(ColumnaGastos.LUGAR));
-//				String detalleGasto = cursor.getString(cursor
-//						.getColumnIndex(ColumnaGastos.DETALLE));
-//				Gasto gasto = new Gasto(idGasto, tipoGasto, fechaGasto, diaGasto,
-//						mesGasto, anioGasto, montoGasto, lugarGasto, detalleGasto);
-//				gastos.add(gasto);
-//			} while (cursor.moveToNext());
-//		}
-//		cursor.close();
-//		db.close();
-//		return gastos;
-//	}
-//	
+	public List<Gasto> getTodosLosGastosDelDia(int dia, int mes, int anio) {
+		List<Gasto> gastos = new ArrayList<Gasto>();
+		SQLiteDatabase db = openHelper.getReadableDatabase();
+		Cursor cursor = db.query(TABLA_GASTOS, new String[] {
+				ColumnaGastos.ID, ColumnaGastos.TIPO, ColumnaGastos.FECHA,
+				ColumnaGastos.DIA, ColumnaGastos.MES,
+				ColumnaGastos.ANIO, ColumnaGastos.MONTO,
+				ColumnaGastos.LUGAR, ColumnaGastos.DETALLE }, ColumnaGastos.DIA + " = ? AND "+ColumnaGastos.MES + "= ? AND "+ ColumnaGastos.ANIO + "= ?",
+				new String[] { String.valueOf(dia), String.valueOf(mes), String.valueOf(anio) }, null, null, null);
+		if (cursor.moveToFirst()) {
+			do {
+				int idGasto = Integer.parseInt(cursor.getString(cursor
+						.getColumnIndex(ColumnaGastos.ID)));
+				int tipoGasto = Integer.parseInt(cursor.getString(cursor
+						.getColumnIndex(ColumnaGastos.TIPO)));
+				String fechaGasto = cursor.getString(cursor
+						.getColumnIndex(ColumnaGastos.FECHA));
+				int diaGasto = Integer.parseInt(cursor.getString(cursor
+						.getColumnIndex(ColumnaGastos.DIA)));
+				int mesGasto = Integer.parseInt(cursor.getString(cursor
+						.getColumnIndex(ColumnaGastos.MES)));
+				int anioGasto = Integer.parseInt(cursor.getString(cursor
+						.getColumnIndex(ColumnaGastos.ANIO)));
+				int montoGasto = Integer.parseInt(cursor.getString(cursor
+						.getColumnIndex(ColumnaGastos.MONTO)));
+				String lugarGasto = cursor.getString(cursor
+						.getColumnIndex(ColumnaGastos.LUGAR));
+				String detalleGasto = cursor.getString(cursor
+						.getColumnIndex(ColumnaGastos.DETALLE));
+				Gasto gasto = new Gasto(idGasto, tipoGasto, fechaGasto, diaGasto,
+						mesGasto, anioGasto, montoGasto, lugarGasto, detalleGasto);
+				gastos.add(gasto);
+			} while (cursor.moveToNext());
+		}
+		cursor.close();
+		db.close();
+		return gastos;
+	}
+	
 	
 	/**
 	 * @description Retorna los gastos del mes seleccionado (mes anio) 
 	 * @param int mes, int anio
 	 * @return List<Gasto>
 	 */
-//	public List<Gasto> getTodosLosGastosDelMes(int mes, int anio) {
-//		List<Gasto> gastos = new ArrayList<Gasto>();
-//		SQLiteDatabase db = openHelper.getReadableDatabase();
-//		Cursor cursor = db.query(TABLA_GASTOS, new String[] {
-//				ColumnaGastos.ID, ColumnaGastos.TIPO, ColumnaGastos.FECHA,
-//				ColumnaGastos.DIA, ColumnaGastos.MES,
-//				ColumnaGastos.ANIO, ColumnaGastos.MONTO,
-//				ColumnaGastos.LUGAR, ColumnaGastos.DETALLE }, ColumnaGastos.MES + "= ? AND "+ ColumnaGastos.ANIO + "= ?",
-//				new String[] { String.valueOf(mes), String.valueOf(anio) }, null, null, null);
-//		if (cursor.moveToFirst()) {
-//			do {
-//				int idGasto = Integer.parseInt(cursor.getString(cursor
-//						.getColumnIndex(ColumnaGastos.ID)));
-//				int tipoGasto = Integer.parseInt(cursor.getString(cursor
-//						.getColumnIndex(ColumnaGastos.TIPO)));
-//				String fechaGasto = cursor.getString(cursor
-//						.getColumnIndex(ColumnaGastos.FECHA));
-//				int diaGasto = Integer.parseInt(cursor.getString(cursor
-//						.getColumnIndex(ColumnaGastos.DIA)));
-//				int mesGasto = Integer.parseInt(cursor.getString(cursor
-//						.getColumnIndex(ColumnaGastos.MES)));
-//				int anioGasto = Integer.parseInt(cursor.getString(cursor
-//						.getColumnIndex(ColumnaGastos.ANIO)));
-//				int montoGasto = Integer.parseInt(cursor.getString(cursor
-//						.getColumnIndex(ColumnaGastos.MONTO)));
-//				String lugarGasto = cursor.getString(cursor
-//						.getColumnIndex(ColumnaGastos.LUGAR));
-//				String detalleGasto = cursor.getString(cursor
-//						.getColumnIndex(ColumnaGastos.DETALLE));
-//				Gasto gasto = new Gasto(idGasto, tipoGasto, fechaGasto, diaGasto,
-//						mesGasto, anioGasto, montoGasto, lugarGasto, detalleGasto);
-//				gastos.add(gasto);
-//			} while (cursor.moveToNext());
-//		}
-//		cursor.close();
-//		db.close();
-//		return gastos;
-//	}
+	public List<Gasto> getTodosLosGastosDelMes(int mes, int anio) {
+		List<Gasto> gastos = new ArrayList<Gasto>();
+		SQLiteDatabase db = openHelper.getReadableDatabase();
+		Cursor cursor = db.query(TABLA_GASTOS, new String[] {
+				ColumnaGastos.ID, ColumnaGastos.TIPO, ColumnaGastos.FECHA,
+				ColumnaGastos.DIA, ColumnaGastos.MES,
+				ColumnaGastos.ANIO, ColumnaGastos.MONTO,
+				ColumnaGastos.LUGAR, ColumnaGastos.DETALLE }, ColumnaGastos.MES + "= ? AND "+ ColumnaGastos.ANIO + "= ?",
+				new String[] { String.valueOf(mes), String.valueOf(anio) }, null, null, null);
+		if (cursor.moveToFirst()) {
+			do {
+				int idGasto = Integer.parseInt(cursor.getString(cursor
+						.getColumnIndex(ColumnaGastos.ID)));
+				int tipoGasto = Integer.parseInt(cursor.getString(cursor
+						.getColumnIndex(ColumnaGastos.TIPO)));
+				String fechaGasto = cursor.getString(cursor
+						.getColumnIndex(ColumnaGastos.FECHA));
+				int diaGasto = Integer.parseInt(cursor.getString(cursor
+						.getColumnIndex(ColumnaGastos.DIA)));
+				int mesGasto = Integer.parseInt(cursor.getString(cursor
+						.getColumnIndex(ColumnaGastos.MES)));
+				int anioGasto = Integer.parseInt(cursor.getString(cursor
+						.getColumnIndex(ColumnaGastos.ANIO)));
+				int montoGasto = Integer.parseInt(cursor.getString(cursor
+						.getColumnIndex(ColumnaGastos.MONTO)));
+				String lugarGasto = cursor.getString(cursor
+						.getColumnIndex(ColumnaGastos.LUGAR));
+				String detalleGasto = cursor.getString(cursor
+						.getColumnIndex(ColumnaGastos.DETALLE));
+				Gasto gasto = new Gasto(idGasto, tipoGasto, fechaGasto, diaGasto,
+						mesGasto, anioGasto, montoGasto, lugarGasto, detalleGasto);
+				gastos.add(gasto);
+			} while (cursor.moveToNext());
+		}
+		cursor.close();
+		db.close();
+		return gastos;
+	}
 
 	
 	/**

@@ -34,7 +34,7 @@ public class TotalDeGastos extends Activity {
 		listaGastos.setAdapter(new GastoAdapter(this, new ArrayList<Gasto>()));			
 		List<Gasto> losGastos = new ArrayList<Gasto>();
 		ControladorBD controlador = new ControladorBD(this);
-		losGastos = controlador.getTodosLosGastos();
+		losGastos = controlador.getTodosLosGastosDelMes(11,2012);//OJO
 		GastoAdapter adapter = (GastoAdapter) listaGastos.getAdapter();
 		adapter.addList(losGastos);		
 	}
