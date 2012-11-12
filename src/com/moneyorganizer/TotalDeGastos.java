@@ -1,17 +1,14 @@
 package com.moneyorganizer;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.moneyorganizer.db.ControladorBD;
 import com.moneyorganizer.elementos.Gasto;
-
-import android.os.AsyncTask;
-import android.os.Bundle;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -22,6 +19,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.HeaderViewListAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.CompoundButton.OnCheckedChangeListener;
@@ -32,7 +30,15 @@ public class TotalDeGastos extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_total_de_gastos);
+		ListView listaGastos = (ListView) findViewById(R.id.lista_gastos);				
+		listaGastos.setAdapter(new GastoAdapter(this, new ArrayList<Gasto>()));			
+		List<Gasto> losGastos = new ArrayList<Gasto>();
+		ControladorBD controlador = new ControladorBD(this);
+		losGastos = controlador.getTodosLosGastos();
+		GastoAdapter adapter = (GastoAdapter) listaGastos.getAdapter();
+		adapter.addList(losGastos);		
 	}
+	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -100,27 +106,24 @@ public class TotalDeGastos extends Activity {
 						false);
 
 				holder = new GastoViewHolder();
-
 				convertView.setTag(holder);
 
-				holder.lugar = (TextView) convertView
-						.findViewById(R.id.lugar_fuente);
-				holder.monto = (TextView) convertView
-						.findViewById(R.id.monto);
-				holder.fecha = (TextView) convertView
-						.findViewById(R.id.fecha);
-
+				holder.lugar = (TextView) convertView.findViewById(R.id.lugar_fuente);
+				holder.monto = (TextView) convertView.findViewById(R.id.monto);
+				holder.fecha = (TextView) convertView.findViewById(R.id.fecha);
 			} else {
 				holder = (GastoViewHolder) convertView.getTag();
 			}
 
 			holder.lugar.setText(gastos.getLugar());
 			holder.lugar.setTag(gastos.getId());
-			holder.monto.setText(gastos.getMonto());
+		
+			holder.monto.setText(Integer.toString(gastos.getMonto()));
 			holder.monto.setTag(gastos.getId());
 			String fechaGasto = String.valueOf(gastos.getDia())+"/"+String.valueOf(gastos.getMes())+"/"+String.valueOf(gastos.getAnio());
 			holder.fecha.setText(fechaGasto);
 			holder.fecha.setTag(gastos.getId());
+			
 //			holder.favorite.setOnCheckedChangeListener(null);
 //			holder.favorite.setChecked(true);
 //			holder.favorite
