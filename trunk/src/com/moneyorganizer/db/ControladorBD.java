@@ -212,13 +212,12 @@ public class ControladorBD implements ConstantesBD {
 		SQLiteDatabase db = openHelper.getWritableDatabase();
 
 		long id = db.insert(TABLA_INGRESOS, null, ingreso.getValues());
-
+		db.close();
 		if (id != -1) {
 			Log.d("", "Datos insertados");
 			//ingreso.setId(id);
 			return true;
 		}
-		db.close();
 		return false;
 	}
 
@@ -243,6 +242,7 @@ public class ControladorBD implements ConstantesBD {
 		SQLiteDatabase db = openHelper.getWritableDatabase();
 		int affectedRows = db.delete(TABLA_INGRESOS, ColumnaIngresos.ID
 				+ " = ?", new String[] { String.valueOf(ingreso.getId()) });
+		db.close();
 		if (affectedRows > 0) {
 			Log.d("", "Datos borrados");
 			return true;
@@ -435,15 +435,13 @@ public class ControladorBD implements ConstantesBD {
 	 */
 	public boolean guardarGasto(Gasto gasto) {
 		SQLiteDatabase db = openHelper.getWritableDatabase();
-
 		long id = db.insert(TABLA_GASTOS, null, gasto.getValues());
-
+		db.close();
 		if (id != -1) {
 			Log.d("", "Datos insertados");
 			//gasto.setId(id);
 			return true;
 		}
-		db.close();
 		return false;
 	}
 
@@ -467,6 +465,7 @@ public class ControladorBD implements ConstantesBD {
 		SQLiteDatabase db = openHelper.getWritableDatabase();
 		int affectedRows = db.delete(TABLA_GASTOS, ColumnaGastos.ID
 				+ " = ?", new String[] { String.valueOf(gasto.getId()) });
+		db.close();
 		if (affectedRows > 0) {
 			Log.d("", "Datos borrados");
 			return true;

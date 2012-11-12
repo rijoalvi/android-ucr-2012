@@ -127,15 +127,15 @@ public class Gasto {
 	}
 	public ContentValues getValues() {
 		ContentValues values = new ContentValues();
-		values.put(ColumnaGastos.ID, getId());
-		values.put(ColumnaGastos.TIPO, getTipo());
-		values.put(ColumnaGastos.FECHA, getFecha());
-		values.put(ColumnaGastos.DIA, getDia());
-		values.put(ColumnaGastos.MES, getMes());
-		values.put(ColumnaGastos.ANIO, getAnio());
-		values.put(ColumnaGastos.MONTO, getMonto());
-		values.put(ColumnaGastos.LUGAR, getLugar());
-		values.put(ColumnaGastos.DETALLE, getDetalle());
+		//values.put(ColumnaGastos.ID, this.getId());
+		values.put(ColumnaGastos.TIPO, this.getTipo());
+		values.put(ColumnaGastos.FECHA, this.getFecha());
+		values.put(ColumnaGastos.DIA, this.getDia());
+		values.put(ColumnaGastos.MES, this.getMes());
+		values.put(ColumnaGastos.ANIO, this.getAnio());
+		values.put(ColumnaGastos.MONTO,this. getMonto());
+		values.put(ColumnaGastos.LUGAR, this.getLugar());
+		values.put(ColumnaGastos.DETALLE, this.getDetalle());
 		return values;
 	}
 }
