@@ -39,33 +39,22 @@
         <activity
             android:name=".CategoriaGasto"
             android:label="@string/title_activity_categoria_gasto" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".CategoriaIngreso"
             android:label="@string/title_activity_categoria_ingreso" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".DetallesIngreso"
             android:label="@string/title_activity_detalles_ingreso" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".DetallesGasto"
             android:label="@string/title_activity_detalles_gasto" >
+        </activity>
+        <activity
+            android:name=".BarraInferior"
+            android:label="@string/title_activity_barra_inferior" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -15,11 +15,12 @@ public final class R {
         public static final int ic_launcher=0x7f020001;
     }
     public static final class id {
-        public static final int DetalGastos=0x7f070026;
-        public static final int DetalIngresos=0x7f070025;
         public static final int artist_name=0x7f070033;
-        public static final int barraInferior=0x7f070029;
+        public static final int barraInferior=0x7f070027;
         public static final int barraSuperior=0x7f07002a;
+        public static final int boton_agregar_gasto=0x7f070028;
+        public static final int boton_agregar_ingreso=0x7f070029;
+        public static final int boton_detalles=0x7f070024;
         public static final int boton_guardar_gasto=0x7f070012;
         public static final int boton_guardar_ingreso=0x7f070018;
         public static final int detalles_gasto_detalles=0x7f070015;
@@ -54,8 +55,8 @@ public final class R {
         public static final int ingreso_header_labels=0x7f070016;
         public static final int ingresos=0x7f07001e;
         public static final int ingresos_header_bar=0x7f07002c;
-        public static final int lista_gastos=0x7f070027;
-        public static final int lista_ingresos=0x7f070028;
+        public static final int lista_gastos=0x7f070025;
+        public static final int lista_ingresos=0x7f070026;
         public static final int menu_settings=0x7f070034;
         public static final int montoDisponible=0x7f070023;
         public static final int montoGastos=0x7f070021;
@@ -67,7 +68,6 @@ public final class R {
         public static final int pager_title_strip=0x7f07001d;
         public static final int song_image=0x7f070031;
         public static final int song_title=0x7f070032;
-        public static final int timeline_buttons=0x7f070024;
     }
     public static final class layout {
         public static final int activity_categoria_gasto=0x7f030000;
@@ -106,6 +106,7 @@ public final class R {
         public static final int montoDisponible=0x7f040009;
         public static final int montoGastos=0x7f040007;
         public static final int montoIngresos=0x7f040005;
+        public static final int title_activity_barra_inferior=0x7f040016;
         public static final int title_activity_categoria_gasto=0x7f040012;
         public static final int title_activity_categoria_ingreso=0x7f040013;
         public static final int title_activity_detalles_gasto=0x7f040015;

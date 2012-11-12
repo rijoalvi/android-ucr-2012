@@ -127,7 +127,7 @@ public class Ingreso {
 	}
 	public ContentValues getValues() {
 		ContentValues values = new ContentValues();
-		values.put(ColumnaIngresos.ID, getId());
+		//values.put(ColumnaIngresos.ID, getId());
 		values.put(ColumnaIngresos.TIPO, getTipo());
 		values.put(ColumnaIngresos.FECHA, getFecha());
 		values.put(ColumnaIngresos.DIA, getDia());
