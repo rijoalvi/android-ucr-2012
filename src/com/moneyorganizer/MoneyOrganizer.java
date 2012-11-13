@@ -136,15 +136,16 @@ public class MoneyOrganizer extends FragmentActivity {
 		}
 	}
 
-//	public void cargarListaIngresos(View view) {
-//		startActivity(new Intent(getApplicationContext(), TotalDeIngresos.class));
-//		// finish();
-//	}
-//
-//	public void cargarListaGastos(View view) {
-//		startActivity(new Intent(getApplicationContext(), TotalDeGastos.class));
-//		// finish();
-//	}
+	// public void cargarListaIngresos(View view) {
+	// startActivity(new Intent(getApplicationContext(),
+	// TotalDeIngresos.class));
+	// // finish();
+	// }
+	//
+	// public void cargarListaGastos(View view) {
+	// startActivity(new Intent(getApplicationContext(), TotalDeGastos.class));
+	// // finish();
+	// }
 
 	@SuppressWarnings("deprecation")
 	public void cargarDetalles(View view) {
@@ -154,41 +155,61 @@ public class MoneyOrganizer extends FragmentActivity {
 		// alertDialog.setIcon(R.drawable.search);
 		alertDialog.setButton("Gasto", new DialogInterface.OnClickListener() {
 			public void onClick(final DialogInterface dialog, final int which) {
-				Intent intento = new Intent(getApplicationContext(), TotalDeGastos.class);
-				intento.putExtra("categoria", "1");
-				startActivity(intento);
-				return;
-			}
-		});
-		alertDialog.setButton2("Ingreso", new DialogInterface.OnClickListener() {
-			public void onClick(final DialogInterface dialog, final int which) {
-				
-				Intent intento = new Intent(getApplicationContext(), TotalDeIngresos.class);
-				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-				Date date = new Date();
-				String fecha = null;
-				fecha = dateFormat.format(date);
-				String temp[] = fecha.split(" ");
-				String fechaDigitos[] = null;
-				String horaDigitos[] = null;
-				if (temp.length > 1) {
-					fechaDigitos = temp[0].split("-");
-				intento.putExtra("mes", Integer.parseInt(temp[1]));
-				intento.putExtra("anio", Integer.parseInt(temp[2]));
-				startActivity(intento);
+				Intent intento = new Intent(getApplicationContext(),
+						TotalDeGastos.class);
+				int fecha[] = getFecha();
+				if (fecha != null) {
+					intento.putExtra("mes", fecha[0]);
+					intento.putExtra("anio", fecha[1]);
 				}
+				startActivity(intento);
 				return;
 			}
 		});
+		alertDialog.setButton2("Ingreso",
+				new DialogInterface.OnClickListener() {
+					public void onClick(final DialogInterface dialog,
+							final int which) {
+
+						Intent intento = new Intent(getApplicationContext(),
+								TotalDeIngresos.class);
+						int fecha[] = getFecha();
+						if (fecha != null) {
+							intento.putExtra("mes", fecha[0]);
+							intento.putExtra("anio", fecha[1]);
+							startActivity(intento);
+						}
+					}
+				});
 		alertDialog.show();
 	}
-	
-	public void agregarIngreso(View view){
-		startActivity(new Intent(getApplicationContext(), CategoriaIngreso.class));
+
+	public int[] getFecha() {  //HAY QUE ARREGLAARLO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		int respuesta[] = new int[2];
+		SimpleDateFormat dateFormat = new SimpleDateFormat(
+				"yyyy-MM-dd HH:mm:ss");
+		Date date = new Date();
+		String fecha = null;
+		fecha = dateFormat.format(date);
+		String temp[] = fecha.split(" ");
+		String fechaDigitos[] = null;
+		String horaDigitos[] = null;
+		if (temp.length > 1) {
+			fechaDigitos = temp[0].split("-");
+			respuesta[0] = Integer.parseInt(fechaDigitos[1]);
+			respuesta[1] = Integer.parseInt(fechaDigitos[2]);
+			return respuesta;
+		}
+		return null;
 	}
-	
-	public void agregarGasto(View view){
+
+	public void agregarIngreso(View view) {
+		startActivity(new Intent(getApplicationContext(),
+				CategoriaIngreso.class));
+	}
+
+	public void agregarGasto(View view) {
 		startActivity(new Intent(getApplicationContext(), CategoriaGasto.class));
 	}
-	
+
 }
