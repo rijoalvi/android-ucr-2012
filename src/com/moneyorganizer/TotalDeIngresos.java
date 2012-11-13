@@ -12,13 +12,20 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 public class TotalDeIngresos extends Activity {
-
+	
+	int mes;
+	int anio;
+	IngresoAdapter adapter;
+	List<Ingreso> losIngresos; 
+	ControladorBD controlador;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -26,10 +33,13 @@ public class TotalDeIngresos extends Activity {
 		ListView listaIngresos = (ListView) findViewById(R.id.lista_ingresos);
 		listaIngresos.setAdapter(new IngresoAdapter(this,
 				new ArrayList<Ingreso>()));
-		List<Ingreso> losIngresos = new ArrayList<Ingreso>();
-		ControladorBD controlador = new ControladorBD(this);
+		losIngresos = new ArrayList<Ingreso>();
+		controlador = new ControladorBD(this);
+		Bundle bundle = getIntent().getExtras();
+		mes = bundle.getInt("mes");
+		anio = bundle.getInt("anio");
 		losIngresos = controlador.getTodosLosIngresos();
-		IngresoAdapter adapter = (IngresoAdapter) listaIngresos.getAdapter();
+		adapter = (IngresoAdapter) listaIngresos.getAdapter();
 		adapter.addList(losIngresos);
 	}
 
@@ -41,11 +51,13 @@ public class TotalDeIngresos extends Activity {
 
 	public void agregarIngreso(View view) {
 		startActivity(new Intent(getApplicationContext(),
-				CategoriaIngreso.class));
+				CategoriaIngreso.class));	
+		finish();
 	}
 
 	public void agregarGasto(View view) {
 		startActivity(new Intent(getApplicationContext(), CategoriaGasto.class));
+		finish();
 	}
 
 	private class IngresoAdapter extends BaseAdapter {
@@ -91,18 +103,21 @@ public class TotalDeIngresos extends Activity {
 
 		public View getView(int position, View convertView, ViewGroup parent) {
 			Ingreso ingreso = (Ingreso) getItem(position);
-
 			GastoViewHolder holder = null;
 			if (convertView == null) {
-
-				convertView = inflater.inflate(R.layout.list_view_layout,
-						parent, false);
-
+				convertView = inflater.inflate(R.layout.list_view_layout,parent, false);
+			/*	convertView.setOnLongClickListener(new OnLongClickListener() {
+					
+					@Override
+					public boolean onLongClick(AdapterView<Adapter> adapter, View v) {
+						
+						 v.
+						return false;
+					}
+				})*/
 				holder = new GastoViewHolder();
 				convertView.setTag(holder);
-
-				holder.fuente = (TextView) convertView
-						.findViewById(R.id.lugar_fuente);
+				holder.fuente = (TextView) convertView.findViewById(R.id.lugar_fuente);
 				holder.monto = (TextView) convertView.findViewById(R.id.monto);
 				holder.fecha = (TextView) convertView.findViewById(R.id.fecha);
 			} else {
