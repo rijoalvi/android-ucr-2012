@@ -3,26 +3,27 @@ package com.moneyorganizer;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import com.moneyorganizer.db.ControladorBD;
 import com.moneyorganizer.elementos.Gasto;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.HeaderViewListAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 
 public class TotalDeGastos extends Activity {
 	int mes;
@@ -34,17 +35,26 @@ public class TotalDeGastos extends Activity {
 		setContentView(R.layout.activity_total_de_gastos);
 		ListView listaGastos = (ListView) findViewById(R.id.lista_gastos);
 		listaGastos.setAdapter(new GastoAdapter(this, new ArrayList<Gasto>()));
-		List<Gasto> losGastos = new ArrayList<Gasto>();
-		ControladorBD controlador = new ControladorBD(this);
+		
+		listaGastos.setOnItemLongClickListener(new OnItemLongClickListener() {
+
+			@Override
+			public boolean onItemLongClick(AdapterView<?> adapterView,
+					View view, int position, long id) {
+				Log.d("", "Borrando persona");
+				Gasto gasto = (Gasto) adapterView.getAdapter().getItem(position);
+				new Borrador().execute(gasto);
+				return true;
+			}
+		});
 		
 		Bundle bundle = getIntent().getExtras();
 		mes = bundle.getInt("mes");
 		anio = bundle.getInt("anio");
 		
 		
-		losGastos = controlador.getTodosLosGastosDelMes(mes, anio);
-		GastoAdapter adapter = (GastoAdapter) listaGastos.getAdapter();
-		adapter.addList(losGastos);
+		//AsyncTask que llena el adaptador
+		new llenaLista().execute();
 	}
 
 	@Override
@@ -56,10 +66,12 @@ public class TotalDeGastos extends Activity {
 	public void agregarIngreso(View view) {
 		startActivity(new Intent(getApplicationContext(),
 				CategoriaIngreso.class));
+		finish();
 	}
 
 	public void agregarGasto(View view) {
 		startActivity(new Intent(getApplicationContext(), CategoriaGasto.class));
+		finish();
 	}
 
 	private class GastoAdapter extends BaseAdapter {
@@ -184,5 +196,70 @@ public class TotalDeGastos extends Activity {
 		public TextView monto;
 		public TextView lugar;
 		public ImageView imagenGasto;
+	}
+	
+	private class Borrador extends AsyncTask<Gasto, Void, Boolean> {
+
+		public Borrador() {
+			
+		}
+
+		@Override
+		protected Boolean doInBackground(Gasto... params) {
+			
+			Gasto gastoABorrar = null;
+			gastoABorrar = params[0];
+			
+
+			if (gastoABorrar != null) {
+				ControladorBD controlador = new ControladorBD(TotalDeGastos.this);
+					return controlador.borrarGasto(gastoABorrar);
+			}
+
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(Boolean result) {
+			if (result != null && result) {
+				String mensaje = "Gasto eliminado";
+				Toast.makeText(TotalDeGastos.this, mensaje, Toast.LENGTH_SHORT)
+						.show();
+				ListView lista = (ListView) findViewById(R.id.lista_gastos);
+				GastoAdapter adapter = (GastoAdapter) lista.getAdapter();
+				adapter.clear();
+				new llenaLista().execute();
+				adapter.refresh();
+			}
+			super.onPostExecute(result);
+		}
+
+		@Override
+		protected void onPreExecute() {
+		}
+
+	}
+	
+	private class llenaLista extends AsyncTask<Void, Void, List<Gasto>>{
+
+		public llenaLista(){
+			
+		}
+		
+		@Override
+		protected List<Gasto> doInBackground(Void... params) {
+			List<Gasto> losGastos = new ArrayList<Gasto>();
+			ControladorBD controlador = new ControladorBD(TotalDeGastos.this);
+			losGastos = controlador.getTodosLosGastosDelMes(mes, anio);
+			return losGastos;
+		}
+
+		@Override
+		protected void onPostExecute(List<Gasto> result) {
+			ListView lista = (ListView) findViewById(R.id.lista_gastos);
+			GastoAdapter adapter = (GastoAdapter) lista.getAdapter();
+			adapter.addList(result);
+		}
+
 	}
 }

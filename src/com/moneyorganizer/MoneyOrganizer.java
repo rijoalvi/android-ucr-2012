@@ -197,7 +197,7 @@ public class MoneyOrganizer extends FragmentActivity {
 		if (temp.length > 1) {
 			fechaDigitos = temp[0].split("-");
 			respuesta[0] = Integer.parseInt(fechaDigitos[1]);
-			respuesta[1] = Integer.parseInt(fechaDigitos[2]);
+			respuesta[1] = Integer.parseInt(fechaDigitos[0]);
 			return respuesta;
 		}
 		return null;
