@@ -3,12 +3,13 @@ package com.moneyorganizer;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import com.moneyorganizer.db.ControladorBD;
 import com.moneyorganizer.elementos.Gasto;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -28,30 +29,55 @@ import android.widget.AdapterView.OnItemLongClickListener;
 public class TotalDeGastos extends Activity {
 	int mes;
 	int anio;
+	Gasto listoParaEliminar;
+
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_total_de_gastos);
 		ListView listaGastos = (ListView) findViewById(R.id.lista_gastos);
-		listaGastos.setAdapter(new GastoAdapter(this, new ArrayList<Gasto>()));
-		
+		listaGastos.setAdapter(new GastoAdapter(this,
+				new ArrayList<Gasto>()));
 		listaGastos.setOnItemLongClickListener(new OnItemLongClickListener() {
 
 			@Override
 			public boolean onItemLongClick(AdapterView<?> adapterView,
 					View view, int position, long id) {
-				Log.d("", "Borrando persona");
-				Gasto gasto = (Gasto) adapterView.getAdapter().getItem(position);
-				new Borrador().execute(gasto);
+				listoParaEliminar = (Gasto) adapterView.getAdapter().getItem(
+						position);
+				AlertDialog.Builder builder = new AlertDialog.Builder(
+						TotalDeGastos.this);
+				builder.setTitle("¡Atención!");
+				builder.setMessage("¿Está seguro de que desea borrar este gasto?");
+				builder.setPositiveButton("Si",
+						new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								Log.d("", "Borrando Gasto");
+								new Borrador().execute(listoParaEliminar);
+								listoParaEliminar= null;
+							}
+						});
+
+				builder.setNegativeButton("No",
+						new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								listoParaEliminar = null;
+							}
+						});
+
+				builder.show();
+
 				return true;
 			}
 		});
 		
+		
 		Bundle bundle = getIntent().getExtras();
 		mes = bundle.getInt("mes");
 		anio = bundle.getInt("anio");
-		
 		
 		//AsyncTask que llena el adaptador
 		new llenaLista().execute();
@@ -98,7 +124,7 @@ public class TotalDeGastos extends Activity {
 			return gastos.size();
 		}
 
-		public List<Gasto> getSongs() {
+		public List<Gasto> getGastos() {
 			return gastos;
 		}
 
@@ -117,7 +143,6 @@ public class TotalDeGastos extends Activity {
 
 		public View getView(int position, View convertView, ViewGroup parent) {
 			Gasto gastos = (Gasto) getItem(position);
-
 			GastoViewHolder holder = null;
 			if (convertView == null) {
 
@@ -126,9 +151,7 @@ public class TotalDeGastos extends Activity {
 
 				holder = new GastoViewHolder();
 				convertView.setTag(holder);
-
-				holder.lugar = (TextView) convertView
-						.findViewById(R.id.lugar_fuente);
+				holder.lugar = (TextView) convertView.findViewById(R.id.lugar_fuente);
 				holder.monto = (TextView) convertView.findViewById(R.id.monto);
 				holder.fecha = (TextView) convertView.findViewById(R.id.fecha);
 			} else {
@@ -145,48 +168,6 @@ public class TotalDeGastos extends Activity {
 					+ String.valueOf(gastos.getAnio());
 			holder.fecha.setText(fechaGasto);
 			holder.fecha.setTag(gastos.getId());
-
-			// holder.favorite.setOnCheckedChangeListener(null);
-			// holder.favorite.setChecked(true);
-			// holder.favorite
-			// .setOnCheckedChangeListener(new OnCheckedChangeListener() {
-			// public void onCheckedChanged(CompoundButton buttonView,
-			// boolean isChecked) {
-			// String id = buttonView.getTag().toString();
-			// if (id != null) {
-			//
-			// final int songID = Integer.parseInt(id);
-			// AlertDialog.Builder dialog = new AlertDialog.Builder(
-			// Favorites.this);
-			// dialog.setTitle("Confirmation");
-			// dialog.setMessage("Do you really want to remove this favorite?");
-			// dialog.setPositiveButton("Si",
-			// new DialogInterface.OnClickListener() {
-			// public void onClick(
-			// DialogInterface dialog,
-			// int id) {
-			// Log.d("", "el ID es: " + id);
-			// removeSong(songID);
-			// }
-			// });
-			// dialog.setNegativeButton("No",
-			// new DialogInterface.OnClickListener() {
-			// public void onClick(
-			// DialogInterface dialog,
-			// int id) {
-			// MusicAdapter adapter = (MusicAdapter) ((HeaderViewListAdapter)
-			// mSongsList
-			// .getAdapter())
-			// .getWrappedAdapter();
-			// adapter.refresh();
-			//
-			// }
-			// });
-			// dialog.show();
-			// }
-			//
-			// }
-			// });
 			return convertView;
 		}
 	}
