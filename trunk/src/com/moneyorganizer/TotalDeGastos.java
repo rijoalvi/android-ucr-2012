@@ -25,20 +25,27 @@ import android.widget.Toast;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 
 public class TotalDeGastos extends Activity {
+	int mes;
+	int anio;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_total_de_gastos);
-		ListView listaGastos = (ListView) findViewById(R.id.lista_gastos);				
-		listaGastos.setAdapter(new GastoAdapter(this, new ArrayList<Gasto>()));			
+		ListView listaGastos = (ListView) findViewById(R.id.lista_gastos);
+		listaGastos.setAdapter(new GastoAdapter(this, new ArrayList<Gasto>()));
 		List<Gasto> losGastos = new ArrayList<Gasto>();
 		ControladorBD controlador = new ControladorBD(this);
-		losGastos = controlador.getTodosLosGastosDelMes(11,2012);//OJO
+		
+		Bundle bundle = getIntent().getExtras();
+		mes = bundle.getInt("mes");
+		anio = bundle.getInt("anio");
+		
+		
+		losGastos = controlador.getTodosLosGastosDelMes(mes, anio);
 		GastoAdapter adapter = (GastoAdapter) listaGastos.getAdapter();
-		adapter.addList(losGastos);		
+		adapter.addList(losGastos);
 	}
-	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -102,13 +109,14 @@ public class TotalDeGastos extends Activity {
 			GastoViewHolder holder = null;
 			if (convertView == null) {
 
-				convertView = inflater.inflate(R.layout.list_view_layout, parent,
-						false);
+				convertView = inflater.inflate(R.layout.list_view_layout,
+						parent, false);
 
 				holder = new GastoViewHolder();
 				convertView.setTag(holder);
 
-				holder.lugar = (TextView) convertView.findViewById(R.id.lugar_fuente);
+				holder.lugar = (TextView) convertView
+						.findViewById(R.id.lugar_fuente);
 				holder.monto = (TextView) convertView.findViewById(R.id.monto);
 				holder.fecha = (TextView) convertView.findViewById(R.id.fecha);
 			} else {
@@ -117,53 +125,56 @@ public class TotalDeGastos extends Activity {
 
 			holder.lugar.setText(gastos.getLugar());
 			holder.lugar.setTag(gastos.getId());
-		
+
 			holder.monto.setText(Integer.toString(gastos.getMonto()));
 			holder.monto.setTag(gastos.getId());
-			String fechaGasto = String.valueOf(gastos.getDia())+"/"+String.valueOf(gastos.getMes())+"/"+String.valueOf(gastos.getAnio());
+			String fechaGasto = String.valueOf(gastos.getDia()) + "/"
+					+ String.valueOf(gastos.getMes()) + "/"
+					+ String.valueOf(gastos.getAnio());
 			holder.fecha.setText(fechaGasto);
 			holder.fecha.setTag(gastos.getId());
-			
-//			holder.favorite.setOnCheckedChangeListener(null);
-//			holder.favorite.setChecked(true);
-//			holder.favorite
-//					.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-//						public void onCheckedChanged(CompoundButton buttonView,
-//								boolean isChecked) {
-//							String id = buttonView.getTag().toString();
-//							if (id != null) {
-//
-//								final int songID = Integer.parseInt(id);
-//								AlertDialog.Builder dialog = new AlertDialog.Builder(
-//										Favorites.this);
-//								dialog.setTitle("Confirmation");
-//								dialog.setMessage("Do you really want to remove this favorite?");
-//								dialog.setPositiveButton("Si",
-//										new DialogInterface.OnClickListener() {
-//											public void onClick(
-//													DialogInterface dialog,
-//													int id) {
-//												Log.d("", "el ID es: " + id);
-//												removeSong(songID);
-//											}
-//										});
-//								dialog.setNegativeButton("No",
-//										new DialogInterface.OnClickListener() {
-//											public void onClick(
-//													DialogInterface dialog,
-//													int id) {
-//												MusicAdapter adapter = (MusicAdapter) ((HeaderViewListAdapter) mSongsList
-//														.getAdapter())
-//														.getWrappedAdapter();
-//												adapter.refresh();
-//
-//											}
-//										});
-//								dialog.show();
-//							}
-//
-//						}
-//					});
+
+			// holder.favorite.setOnCheckedChangeListener(null);
+			// holder.favorite.setChecked(true);
+			// holder.favorite
+			// .setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			// public void onCheckedChanged(CompoundButton buttonView,
+			// boolean isChecked) {
+			// String id = buttonView.getTag().toString();
+			// if (id != null) {
+			//
+			// final int songID = Integer.parseInt(id);
+			// AlertDialog.Builder dialog = new AlertDialog.Builder(
+			// Favorites.this);
+			// dialog.setTitle("Confirmation");
+			// dialog.setMessage("Do you really want to remove this favorite?");
+			// dialog.setPositiveButton("Si",
+			// new DialogInterface.OnClickListener() {
+			// public void onClick(
+			// DialogInterface dialog,
+			// int id) {
+			// Log.d("", "el ID es: " + id);
+			// removeSong(songID);
+			// }
+			// });
+			// dialog.setNegativeButton("No",
+			// new DialogInterface.OnClickListener() {
+			// public void onClick(
+			// DialogInterface dialog,
+			// int id) {
+			// MusicAdapter adapter = (MusicAdapter) ((HeaderViewListAdapter)
+			// mSongsList
+			// .getAdapter())
+			// .getWrappedAdapter();
+			// adapter.refresh();
+			//
+			// }
+			// });
+			// dialog.show();
+			// }
+			//
+			// }
+			// });
 			return convertView;
 		}
 	}
