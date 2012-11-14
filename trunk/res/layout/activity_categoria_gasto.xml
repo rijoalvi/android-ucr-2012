@@ -37,7 +37,7 @@
                 android:layout_width="75dp"
                 android:layout_height="75dp"
                 android:layout_marginLeft="15dp"
-                android:background="#cccccc"
+                android:background="@drawable/transporte"
                 android:onClick="gastoTransporte" />
 
             <TextView
@@ -62,7 +62,7 @@
                 android:layout_width="75dp"
                 android:layout_height="75dp"
                 android:layout_marginLeft="15dp"
-                android:background="#cccccc"
+                android:background="@drawable/servicios"
                 android:onClick="gastoServicios" />
 
             <TextView
@@ -87,13 +87,12 @@
                 android:layout_width="75dp"
                 android:layout_height="75dp"
                 android:layout_marginLeft="15dp"
-                android:background="#cccccc"
+                android:background="@drawable/alimentacion"
                 android:onClick="gastoAlimentacion" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                gastoAlimentacion=""
                 android:gravity="center"
                 android:text="Alimentación"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
@@ -120,7 +119,7 @@
                 android:layout_width="75dp"
                 android:layout_height="75dp"
                 android:layout_marginLeft="15dp"
-                android:background="#cccccc"
+                android:background="@drawable/recreacion"
                 android:onClick="gastoRecreacion" />
 
             <TextView
@@ -145,7 +144,7 @@
                 android:layout_width="75dp"
                 android:layout_height="75dp"
                 android:layout_marginLeft="15dp"
-                android:background="#cccccc"
+                android:background="@drawable/tecnologia"
                 android:onClick="gastoTecnologia" />
 
             <TextView
@@ -170,7 +169,7 @@
                 android:layout_width="75dp"
                 android:layout_height="75dp"
                 android:layout_marginLeft="15dp"
-                android:background="#cccccc"
+                android:background="@drawable/ropa"
                 android:onClick="gastoRopa" />
 
             <TextView
@@ -203,7 +202,7 @@
                 android:layout_width="75dp"
                 android:layout_height="75dp"
                 android:layout_marginLeft="15dp"
-                android:background="#cccccc"
+                android:background="@drawable/impuestos"
                 android:onClick="gastoImpuestos" />
 
             <TextView
@@ -228,7 +227,7 @@
                 android:layout_width="75dp"
                 android:layout_height="75dp"
                 android:layout_marginLeft="15dp"
-                android:background="#cccccc"
+                android:background="@drawable/regalos"
                 android:onClick="gastoRegalos" />
 
             <TextView
@@ -253,7 +252,7 @@
                 android:layout_width="75dp"
                 android:layout_height="75dp"
                 android:layout_marginLeft="15dp"
-                android:background="#cccccc"
+                android:background="@drawable/otros"
                 android:onClick="gastoOtros" />
 
             <TextView

@@ -36,7 +36,7 @@
                 android:layout_width="75dp"
                 android:layout_height="75dp"
                 android:layout_marginLeft="15dp"
-                android:background="#cccccc"
+                android:background="@drawable/salario"
                 android:onClick="ingresoSalario" />
 
             <TextView
@@ -60,7 +60,7 @@
                 android:layout_width="75dp"
                 android:layout_height="75dp"
                 android:layout_marginLeft="15dp"
-                android:background="#cccccc"
+                android:background="@drawable/alquileres"
                 android:onClick="ingresoAlquileres" />
 
             <TextView
@@ -84,7 +84,7 @@
                 android:layout_width="75dp"
                 android:layout_height="75dp"
                 android:layout_marginLeft="15dp"
-                android:background="#cccccc"
+                android:background="@drawable/inversiones"
                 android:onClick="ingresoInversiones" />
 
             <TextView
@@ -116,7 +116,7 @@
                 android:layout_width="75dp"
                 android:layout_height="75dp"
                 android:layout_marginLeft="15dp"
-                android:background="#cccccc"
+                android:background="@drawable/pensiones"
                 android:onClick="ingresoPensiones" />
 
             <TextView
@@ -140,7 +140,7 @@
                 android:layout_width="75dp"
                 android:layout_height="75dp"
                 android:layout_marginLeft="15dp"
-                android:background="#cccccc"
+                android:background="@drawable/cobros"
                 android:onClick="ingresoCobros" />
 
             <TextView
@@ -164,7 +164,7 @@
                 android:layout_width="75dp"
                 android:layout_height="75dp"
                 android:layout_marginLeft="15dp"
-                android:background="#cccccc"
+                android:background="@drawable/bonos"
                 android:onClick="ingresoBonos" />
 
             <TextView
@@ -196,7 +196,7 @@
                 android:layout_width="75dp"
                 android:layout_height="75dp"
                 android:layout_marginLeft="15dp"
-                android:background="#cccccc"
+                android:background="@drawable/reembolsos"
                 android:onClick="ingresoReembolsos" />
 
             <TextView
@@ -220,7 +220,7 @@
                 android:layout_width="75dp"
                 android:layout_height="75dp"
                 android:layout_marginLeft="15dp"
-                android:background="#cccccc"
+                android:background="@drawable/regalos"
                 android:onClick="ingresoRegalos" />
 
             <TextView
@@ -244,7 +244,7 @@
                 android:layout_width="75dp"
                 android:layout_height="75dp"
                 android:layout_marginLeft="15dp"
-                android:background="#cccccc"
+                android:background="@drawable/otros2"
                 android:onClick="ingresoOtros" />
 
             <TextView
