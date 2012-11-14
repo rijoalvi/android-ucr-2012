@@ -21,7 +21,7 @@
             android:label="@string/title_activity_pantalla_principal" >
         </activity>
         <activity
-            android:name=".MoneyOrganizer"
+            android:name="SwipoeViews"
             android:label="@string/title_activity_swipoe_views" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

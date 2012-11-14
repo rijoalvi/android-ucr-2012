@@ -56,7 +56,7 @@ public class MoneyOrganizer extends FragmentActivity {
 	 */
 	public class CollectionPagerAdapter extends FragmentStatePagerAdapter {
 
-		final int NUM_ITEMS = 3; // number of tabs
+		final int NUM_ITEMS = 2; // number of tabs
 
 		public CollectionPagerAdapter(FragmentManager fm) {
 			super(fm);

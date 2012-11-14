@@ -176,7 +176,7 @@ public class SwipoeViews extends FragmentActivity {
         tabLayout = R.layout.activity_pantalla_principal;
         break;
         case 1:
-        tabLayout = R.layout.activity_total_de_gastos;
+        tabLayout = R.layout.activity_pantalla_principal;
         break;
         case 2:
         tabLayout = R.layout.activity_pantalla_principal;
