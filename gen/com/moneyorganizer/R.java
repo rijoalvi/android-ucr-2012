@@ -11,11 +11,26 @@ public final class R {
     public static final class attr {
     }
     public static final class drawable {
-        public static final int ic_action_search=0x7f020000;
-        public static final int ic_launcher=0x7f020001;
+        public static final int alimentacion=0x7f020000;
+        public static final int alquileres=0x7f020001;
+        public static final int bonos=0x7f020002;
+        public static final int cobros=0x7f020003;
+        public static final int ic_launcher=0x7f020004;
+        public static final int impuestos=0x7f020005;
+        public static final int inversiones=0x7f020006;
+        public static final int otros=0x7f020007;
+        public static final int otros2=0x7f020008;
+        public static final int pensiones=0x7f020009;
+        public static final int recreacion=0x7f02000a;
+        public static final int reembolsos=0x7f02000b;
+        public static final int regalos=0x7f02000c;
+        public static final int ropa=0x7f02000d;
+        public static final int salario=0x7f02000e;
+        public static final int servicios=0x7f02000f;
+        public static final int tecnologia=0x7f020010;
+        public static final int transporte=0x7f020011;
     }
     public static final class id {
-        public static final int artist_name=0x7f070033;
         public static final int barraInferior=0x7f070027;
         public static final int barraSuperior=0x7f07002a;
         public static final int boton_agregar_gasto=0x7f070028;
@@ -30,11 +45,13 @@ public final class R {
         public static final int detalles_ingreso_fuente=0x7f07001a;
         public static final int detalles_ingreso_monto=0x7f070019;
         public static final int disponible=0x7f070022;
+        public static final int fecha=0x7f070034;
         public static final int gasto_header_bar=0x7f070011;
         public static final int gasto_header_labels=0x7f070010;
         public static final int gastos=0x7f070020;
         public static final int gastos_header_bar=0x7f07002d;
         public static final int header_labels=0x7f07002b;
+        public static final int imagen=0x7f070031;
         public static final int imagen_alimentacion=0x7f070002;
         public static final int imagen_alquileres=0x7f07000a;
         public static final int imagen_bonos=0x7f07000e;
@@ -57,7 +74,9 @@ public final class R {
         public static final int ingresos_header_bar=0x7f07002c;
         public static final int lista_gastos=0x7f070025;
         public static final int lista_ingresos=0x7f070026;
-        public static final int menu_settings=0x7f070034;
+        public static final int lugar_fuente=0x7f070032;
+        public static final int menu_settings=0x7f070035;
+        public static final int monto=0x7f070033;
         public static final int montoDisponible=0x7f070023;
         public static final int montoGastos=0x7f070021;
         public static final int montoIngresos=0x7f07001f;
@@ -66,8 +85,6 @@ public final class R {
         public static final int monto_ingresos_header_bar=0x7f07002f;
         public static final int pager=0x7f07001c;
         public static final int pager_title_strip=0x7f07001d;
-        public static final int song_image=0x7f070031;
-        public static final int song_title=0x7f070032;
     }
     public static final class layout {
         public static final int activity_categoria_gasto=0x7f030000;

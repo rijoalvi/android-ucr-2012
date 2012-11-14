@@ -9,7 +9,6 @@ import com.moneyorganizer.elementos.Ingreso;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
-import android.content.ContentValues;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
