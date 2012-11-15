@@ -11,7 +11,7 @@ public class Ingreso {
 	int dia;
 	int mes;
 	int anio;
-	int monto;
+	float monto;
 	String fuente;
 	String detalle;
 	
@@ -20,7 +20,7 @@ public class Ingreso {
 	}
 
 	public Ingreso(int tipo, String fecha, int dia, int mes, int anio,
-			int monto, String fuente, String detalle) {
+			float monto, String fuente, String detalle) {
 		super();
 		this.tipo = tipo;
 		this.fecha = fecha;
@@ -33,7 +33,7 @@ public class Ingreso {
 	}
 
 	public Ingreso(int id, int tipo, String fecha, int dia, int mes, int anio,
-			int monto, String fuente, String detalle) {
+			float monto, String fuente, String detalle) {
 		super();
 		this.id = id;
 		this.tipo = tipo;
@@ -94,11 +94,11 @@ public class Ingreso {
 		this.anio = anio;
 	}
 
-	public int getMonto() {
+	public float getMonto() {
 		return monto;
 	}
 
-	public void setMonto(int monto) {
+	public void setMonto(float monto) {
 		this.monto = monto;
 	}
 

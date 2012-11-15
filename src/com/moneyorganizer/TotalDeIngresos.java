@@ -34,6 +34,8 @@ public class TotalDeIngresos extends Activity {
 	IngresoAdapter adapter;
 	List<Ingreso> losIngresos; 
 	ControladorBD controlador;
+	private float tipoDeCambio;
+	private boolean estaEnDolares;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -80,7 +82,8 @@ public class TotalDeIngresos extends Activity {
 		Bundle bundle = getIntent().getExtras();
 		mes = bundle.getInt("mes");
 		anio = bundle.getInt("anio");
-		
+		tipoDeCambio=bundle.getFloat("tipoDeCambio");
+		estaEnDolares = bundle.getBoolean("dolares");
 		
 		//AsyncTask que llena el adaptador
 		new llenaLista().execute();
@@ -105,13 +108,19 @@ public class TotalDeIngresos extends Activity {
 	}
 
 	public void agregarIngreso(View view) {
-		startActivity(new Intent(getApplicationContext(),
-				CategoriaIngreso.class));	
+		Intent intento = new Intent(getApplicationContext(),
+				CategoriaIngreso.class);
+		intento.putExtra("dolares", estaEnDolares);
+		intento.putExtra("tipoDeCambio",tipoDeCambio);
+		startActivity(intento);	
 		finish();
 	}
 
 	public void agregarGasto(View view) {
-		startActivity(new Intent(getApplicationContext(), CategoriaGasto.class));
+		Intent intento =new Intent(getApplicationContext(), CategoriaGasto.class); 
+		intento.putExtra("dolares", estaEnDolares);
+		intento.putExtra("tipoDeCambio",tipoDeCambio);
+		startActivity(intento);
 		finish();
 	}
 
@@ -170,10 +179,15 @@ public class TotalDeIngresos extends Activity {
 			} else {
 				holder = (IngresoViewHolder) convertView.getTag();
 			}
+			
+			float monto = ingreso.getMonto();
+			if(estaEnDolares){
+				monto = monto /tipoDeCambio;
+			}
 
 			holder.fuente.setText(ingreso.getFuente());
 			holder.fuente.setTag(ingreso.getId());
-			holder.monto.setText(Integer.toString(ingreso.getMonto()));
+			holder.monto.setText(Float.toString(monto));
 			holder.monto.setTag(ingreso.getId());
 			String fechaIngreso = String.valueOf(ingreso.getDia()) + "/"
 					+ String.valueOf(ingreso.getMes()) + "/"

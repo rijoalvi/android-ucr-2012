@@ -31,6 +31,7 @@ import com.moneyorganizer.R;
 public class SwipoeViews extends FragmentActivity {
 	public static final String TAG = MainActivity.class.getName();
 	CollectionPagerAdapter mCollectionPagerAdapter;
+	boolean estaEnDolares = false;
 	float tipoDeCambio =0;
 	int mes;
 	int anio;
@@ -213,7 +214,6 @@ public class SwipoeViews extends FragmentActivity {
 //				break;
 //			
 //        }
- 
         View rootView = inflater.inflate(tabLayout, container, false);
         //TextView rootView = new TextView(getActivity());//inflater.inflate(tabLayout, container, false);
         //rootView.setText("Prueba "+position);
@@ -231,6 +231,8 @@ public class SwipoeViews extends FragmentActivity {
 			public void onClick(final DialogInterface dialog, final int which) {
 				Intent intento = new Intent(getApplicationContext(),
 						TotalDeGastos.class);
+				intento.putExtra("dolares", estaEnDolares);
+				intento.putExtra("tipoDeCambio",tipoDeCambio);
 				int fecha[] = getFecha();
 				if (fecha != null) {
 					intento.putExtra("mes", fecha[0]);
@@ -247,6 +249,8 @@ public class SwipoeViews extends FragmentActivity {
 
 						Intent intento = new Intent(getApplicationContext(),
 								TotalDeIngresos.class);
+						intento.putExtra("dolares", estaEnDolares);
+						intento.putExtra("tipoDeCambio",tipoDeCambio);
 						int fecha[] = getFecha();
 						if (fecha != null) {
 							intento.putExtra("mes", fecha[0]);
@@ -278,11 +282,17 @@ public class SwipoeViews extends FragmentActivity {
 	}
 
 	public void agregarIngreso(View view) {
-		startActivity(new Intent(getApplicationContext(),
-				CategoriaIngreso.class));
+		Intent intento=new Intent(getApplicationContext(),
+				CategoriaIngreso.class);
+		intento.putExtra("dolares", estaEnDolares);
+		intento.putExtra("tipoDeCambio",tipoDeCambio);
+		startActivity(intento);
 	}
 
 	public void agregarGasto(View view) {
-		startActivity(new Intent(getApplicationContext(), CategoriaGasto.class));
+		Intent intento=new Intent(getApplicationContext(), CategoriaGasto.class);
+		intento.putExtra("dolares", estaEnDolares);
+		intento.putExtra("tipoDeCambio",tipoDeCambio);
+		startActivity(intento);
 	}
 }

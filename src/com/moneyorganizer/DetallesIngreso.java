@@ -18,13 +18,17 @@ import android.widget.Toast;
 public class DetallesIngreso extends Activity {
 
 	int categoriaIngreso;
-
+	private float tipoDeCambio;
+	private boolean estaEnDolares;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_detalles_ingreso);
 		Bundle bundle = getIntent().getExtras();
 		categoriaIngreso = Integer.parseInt(bundle.getString("categoria"));
+		tipoDeCambio=bundle.getFloat("tipoDeCambio");
+		estaEnDolares = bundle.getBoolean("dolares");
 	}
 
 	@Override
@@ -57,18 +61,24 @@ public class DetallesIngreso extends Activity {
 			fechaDigitos = temp[0].split("-");
 			horaDigitos = temp[1].split(":");
 
+			float montoIngresado = Integer.parseInt(monto
+					.getText().toString());
+			
+			if(estaEnDolares){
+				montoIngresado=montoIngresado*tipoDeCambio;
+			}
+			
 			// Se crea el objeto Ingreso a guardar
 			Ingreso ingreso = new Ingreso(categoriaIngreso,
 					fecha,
 					Integer.parseInt(fechaDigitos[2]),
 					Integer.parseInt(fechaDigitos[1]),
-					Integer.parseInt(fechaDigitos[0]), Integer.parseInt(monto
-							.getText().toString()),
+					Integer.parseInt(fechaDigitos[0]), montoIngresado,
 					fuente.getText().toString(), detalle.getText().toString());
 			Log.d("", "Se va a guardar:" + categoriaIngreso + " "
 					+ fecha + " "
 					+ fechaDigitos[2] + " " + fechaDigitos[1] + " "
-					+ fechaDigitos[0] + " " + monto.getText().toString() + " "
+					+ fechaDigitos[0] + " " + montoIngresado + " "
 					+ fuente.getText().toString() + " "
 					+ detalle.getText().toString());
 			// guardarSong

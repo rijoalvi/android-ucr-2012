@@ -11,7 +11,7 @@ public class Gasto {
 	int dia;
 	int mes;
 	int anio;
-	int monto;
+	float monto;
 	String lugar;
 	String detalle;
 	
@@ -19,7 +19,7 @@ public class Gasto {
 		super();
 	}
 	
-	public Gasto(int tipo, String fecha, int dia, int mes, int anio, int monto,
+	public Gasto(int tipo, String fecha, int dia, int mes, int anio, float monto,
 			String lugar, String detalle) {
 		super();
 		this.tipo = tipo;
@@ -33,7 +33,7 @@ public class Gasto {
 	}
 	
 	public Gasto(int id, int tipo, String fecha, int dia, int mes, int anio,
-			int monto, String lugar, String detalle) {
+			float monto, String lugar, String detalle) {
 		super();
 		this.id = id;
 		this.tipo = tipo;
@@ -94,11 +94,11 @@ public class Gasto {
 		this.anio = anio;
 	}
 
-	public int getMonto() {
+	public float getMonto() {
 		return monto;
 	}
 
-	public void setMonto(int monto) {
+	public void setMonto(float monto) {
 		this.monto = monto;
 	}
 
