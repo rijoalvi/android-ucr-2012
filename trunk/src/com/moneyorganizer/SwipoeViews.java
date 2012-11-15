@@ -26,6 +26,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.moneyorganizer.R;
 
@@ -160,6 +162,13 @@ public class SwipoeViews extends FragmentActivity {
 			Fragment fragment = new TabFragment();
 			Bundle args = new Bundle();
 			args.putInt(TabFragment.ARG_OBJECT, i);
+			int ingresos = 500+i;
+			int gastos = 320+i;
+			int disponible = ingresos-gastos;
+			
+			args.putInt("ingresos", ingresos);
+			args.putInt("ingresos", gastos);
+			args.putInt("ingresos", disponible);
 			fragment.setArguments(args);
 
 			return fragment;
@@ -257,9 +266,9 @@ public class SwipoeViews extends FragmentActivity {
 	 * A dummy fragment representing a section of the app, but that simply
 	 * displays dummy text.
 	 */
-	public static class TabFragment extends Fragment {
+	public  class TabFragment extends Fragment {
 
-		public static final String ARG_OBJECT = "object";
+		public  final static String ARG_OBJECT = "object";
 
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -267,19 +276,16 @@ public class SwipoeViews extends FragmentActivity {
 
 			Bundle args = getArguments();
 			int position = args.getInt(ARG_OBJECT);
-
+			
 			int tabLayout = 0;
-			// switch (position) {
-			// case 0:
-			tabLayout = R.layout.activity_pantalla_principal;
-			// break;
-			//
-			// }
+			tabLayout = R.layout.activity_pantalla_principal;	
 			View rootView = inflater.inflate(tabLayout, container, false);
-			// TextView rootView = new
-			// TextView(getActivity());//inflater.inflate(tabLayout, container,
-			// false);
-			// rootView.setText("Prueba "+position);
+			TextView ingresos = (TextView) rootView.findViewById(R.id.montoIngresos);
+			ingresos.setText(String.valueOf(args.getInt("ingresos")));
+			TextView gastos = (TextView) rootView.findViewById(R.id.montoGastos);
+			gastos.setText(String.valueOf(args.getInt("gastos")));
+			TextView disponible = (TextView) rootView.findViewById(R.id.montoDisponible);
+			disponible.setText(String.valueOf(args.getInt("disponible")));
 			return rootView;
 		}
 		

@@ -25,5 +25,9 @@ public class PantallaPrincipal extends Activity {
 	    super.onConfigurationChanged(newConfig);
 	    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 	}
+	
+	public void prueba(){
+		
+	}
 
 }
