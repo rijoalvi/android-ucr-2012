@@ -29,16 +29,16 @@ import android.widget.Toast;
 import android.widget.AdapterView.OnItemLongClickListener;
 
 public class TotalDeIngresos extends Activity {
-	
+
 	int mes;
 	int anio;
 	Ingreso listoParaEliminar;
 	IngresoAdapter adapter;
-	List<Ingreso> losIngresos; 
+	List<Ingreso> losIngresos;
 	ControladorBD controlador;
 	private float tipoDeCambio;
 	private boolean estaEnDolares;
-	
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -60,17 +60,19 @@ public class TotalDeIngresos extends Activity {
 				builder.setPositiveButton("Si",
 						new DialogInterface.OnClickListener() {
 							@Override
-							public void onClick(DialogInterface dialog, int which) {
+							public void onClick(DialogInterface dialog,
+									int which) {
 								Log.d("", "Borrando Ingreso");
 								new Borrador().execute(listoParaEliminar);
-								listoParaEliminar= null;
+								listoParaEliminar = null;
 							}
 						});
 
 				builder.setNegativeButton("No",
 						new DialogInterface.OnClickListener() {
 							@Override
-							public void onClick(DialogInterface dialog, int which) {
+							public void onClick(DialogInterface dialog,
+									int which) {
 								listoParaEliminar = null;
 							}
 						});
@@ -80,27 +82,24 @@ public class TotalDeIngresos extends Activity {
 				return true;
 			}
 		});
-		
+
 		Bundle bundle = getIntent().getExtras();
 		mes = bundle.getInt("mes");
 		anio = bundle.getInt("anio");
-		tipoDeCambio=bundle.getFloat("tipoDeCambio");
+		tipoDeCambio = bundle.getFloat("tipoDeCambio");
 		estaEnDolares = bundle.getBoolean("dolares");
-		
-		//AsyncTask que llena el adaptador
+
+		// AsyncTask que llena el adaptador
 		new llenaLista().execute();
-		
-		
-		
-		
-//		losIngresos = new ArrayList<Ingreso>();
-//		controlador = new ControladorBD(this);
-//		Bundle bundle = getIntent().getExtras();
-//		mes = bundle.getInt("mes");
-//		anio = bundle.getInt("anio");
-//		losIngresos = controlador.getTodosLosIngresos();
-//		adapter = (IngresoAdapter) listaIngresos.getAdapter();
-//		adapter.addList(losIngresos);
+
+		// losIngresos = new ArrayList<Ingreso>();
+		// controlador = new ControladorBD(this);
+		// Bundle bundle = getIntent().getExtras();
+		// mes = bundle.getInt("mes");
+		// anio = bundle.getInt("anio");
+		// losIngresos = controlador.getTodosLosIngresos();
+		// adapter = (IngresoAdapter) listaIngresos.getAdapter();
+		// adapter.addList(losIngresos);
 	}
 
 	@Override
@@ -113,15 +112,16 @@ public class TotalDeIngresos extends Activity {
 		Intent intento = new Intent(getApplicationContext(),
 				CategoriaIngreso.class);
 		intento.putExtra("dolares", estaEnDolares);
-		intento.putExtra("tipoDeCambio",tipoDeCambio);
-		startActivity(intento);	
+		intento.putExtra("tipoDeCambio", tipoDeCambio);
+		startActivity(intento);
 		finish();
 	}
 
 	public void agregarGasto(View view) {
-		Intent intento =new Intent(getApplicationContext(), CategoriaGasto.class); 
+		Intent intento = new Intent(getApplicationContext(),
+				CategoriaGasto.class);
 		intento.putExtra("dolares", estaEnDolares);
-		intento.putExtra("tipoDeCambio",tipoDeCambio);
+		intento.putExtra("tipoDeCambio", tipoDeCambio);
 		startActivity(intento);
 		finish();
 	}
@@ -171,20 +171,23 @@ public class TotalDeIngresos extends Activity {
 			Ingreso ingreso = (Ingreso) getItem(position);
 			IngresoViewHolder holder = null;
 			if (convertView == null) {
-				convertView = inflater.inflate(R.layout.list_view_layout,parent, false);
-			
+				convertView = inflater.inflate(R.layout.list_view_layout,
+						parent, false);
+
 				holder = new IngresoViewHolder();
 				convertView.setTag(holder);
-				holder.fuente = (TextView) convertView.findViewById(R.id.lugar_fuente);
+				holder.fuente = (TextView) convertView
+						.findViewById(R.id.lugar_fuente);
 				holder.monto = (TextView) convertView.findViewById(R.id.monto);
 				holder.fecha = (TextView) convertView.findViewById(R.id.fecha);
+				holder.imagenIngreso = (ImageView) convertView.findViewById(R.id.imagen);
 			} else {
 				holder = (IngresoViewHolder) convertView.getTag();
 			}
-			
+
 			float monto = ingreso.getMonto();
-			if(estaEnDolares){
-				monto = monto /tipoDeCambio;
+			if (estaEnDolares) {
+				monto = monto / tipoDeCambio;
 			}
 
 			holder.fuente.setText(ingreso.getFuente());
@@ -196,8 +199,43 @@ public class TotalDeIngresos extends Activity {
 					+ String.valueOf(ingreso.getAnio());
 			holder.fecha.setText(fechaIngreso);
 			holder.fecha.setTag(ingreso.getId());
+			int tipo = ingreso.getTipo();
+			setImage(tipo, holder);
 			return convertView;
 		}
+
+		public void setImage(int tipo, IngresoViewHolder holder) {
+			switch (tipo) {
+			case 1:
+				holder.imagenIngreso.setImageResource(R.drawable.salario);
+				break;
+			case 2:
+				holder.imagenIngreso.setImageResource(R.drawable.alquileres);
+				break;
+			case 3:
+				holder.imagenIngreso.setImageResource(R.drawable.inversiones);
+				break;
+			case 4:
+				holder.imagenIngreso.setImageResource(R.drawable.pensiones);
+				break;
+			case 5:
+				holder.imagenIngreso.setImageResource(R.drawable.cobros);
+				break;
+			case 6:
+				holder.imagenIngreso.setImageResource(R.drawable.bonos);
+				break;
+			case 7:
+				holder.imagenIngreso.setImageResource(R.drawable.reembolsos);
+				break;
+			case 8:
+				holder.imagenIngreso.setImageResource(R.drawable.regalos);
+				break;
+			case 9:
+				holder.imagenIngreso.setImageResource(R.drawable.otros2);
+				break;
+			}
+		}
+
 	}
 
 	private static class IngresoViewHolder {
@@ -206,23 +244,23 @@ public class TotalDeIngresos extends Activity {
 		public TextView fuente;
 		public ImageView imagenIngreso;
 	}
-	
+
 	private class Borrador extends AsyncTask<Ingreso, Void, Boolean> {
 
 		public Borrador() {
-			
+
 		}
 
 		@Override
 		protected Boolean doInBackground(Ingreso... params) {
-			
+
 			Ingreso gastoABorrar = null;
 			gastoABorrar = params[0];
-			
 
 			if (gastoABorrar != null) {
-				ControladorBD controlador = new ControladorBD(TotalDeIngresos.this);
-					return controlador.borrarIngreso(gastoABorrar);
+				ControladorBD controlador = new ControladorBD(
+						TotalDeIngresos.this);
+				return controlador.borrarIngreso(gastoABorrar);
 			}
 
 			return null;
@@ -232,8 +270,8 @@ public class TotalDeIngresos extends Activity {
 		protected void onPostExecute(Boolean result) {
 			if (result != null && result) {
 				String mensaje = "Ingreso eliminado";
-				Toast.makeText(TotalDeIngresos.this, mensaje, Toast.LENGTH_SHORT)
-						.show();
+				Toast.makeText(TotalDeIngresos.this, mensaje,
+						Toast.LENGTH_SHORT).show();
 				ListView lista = (ListView) findViewById(R.id.lista_ingresos);
 				IngresoAdapter adapter = (IngresoAdapter) lista.getAdapter();
 				adapter.clear();
@@ -248,13 +286,13 @@ public class TotalDeIngresos extends Activity {
 		}
 
 	}
-	
-	private class llenaLista extends AsyncTask<Void, Void, List<Ingreso>>{
 
-		public llenaLista(){
-			
+	private class llenaLista extends AsyncTask<Void, Void, List<Ingreso>> {
+
+		public llenaLista() {
+
 		}
-		
+
 		@Override
 		protected List<Ingreso> doInBackground(Void... params) {
 			List<Ingreso> losIngresos = new ArrayList<Ingreso>();
@@ -271,10 +309,10 @@ public class TotalDeIngresos extends Activity {
 		}
 
 	}
-	
+
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) {
-	    super.onConfigurationChanged(newConfig);
-	    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+		super.onConfigurationChanged(newConfig);
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 	}
 }
