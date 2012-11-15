@@ -22,7 +22,7 @@ public class OpenHelper extends SQLiteOpenHelper implements ConstantesBD {
 				+ ColumnaIngresos.DIA + " INTEGER, "
 				+ ColumnaIngresos.MES + " INTEGER, " 
 				+ ColumnaIngresos.ANIO + " INTEGER, "
-				+ ColumnaIngresos.MONTO + " INTEGER, "
+				+ ColumnaIngresos.MONTO + " FLOAT, "
 				+ ColumnaIngresos.FUENTE + " TEXT, "
 				+ ColumnaIngresos.DETALLE + " TEXT" + ")");
 		Log.d("", "Columna de ingresos creada");
@@ -34,7 +34,7 @@ public class OpenHelper extends SQLiteOpenHelper implements ConstantesBD {
 				+ ColumnaGastos.DIA + " INTEGER, "
 				+ ColumnaGastos.MES + " INTEGER, " 
 				+ ColumnaGastos.ANIO + " INTEGER, "
-				+ ColumnaGastos.MONTO + " INTEGER, "
+				+ ColumnaGastos.MONTO + " FLOAT, "
 				+ ColumnaGastos.LUGAR + " TEXT, "
 				+ ColumnaGastos.DETALLE + " TEXT" + ")");
 		Log.d("", "Columna de gastos creada");

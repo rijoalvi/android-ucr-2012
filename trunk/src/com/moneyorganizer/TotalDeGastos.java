@@ -31,11 +31,14 @@ public class TotalDeGastos extends Activity {
 	int anio;
 	Gasto listoParaEliminar;
 
-
+	private float tipoDeCambio;
+	private boolean estaEnDolares;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_total_de_gastos);
+		
 		ListView listaGastos = (ListView) findViewById(R.id.lista_gastos);
 		listaGastos.setAdapter(new GastoAdapter(this,
 				new ArrayList<Gasto>()));
@@ -78,7 +81,8 @@ public class TotalDeGastos extends Activity {
 		Bundle bundle = getIntent().getExtras();
 		mes = bundle.getInt("mes");
 		anio = bundle.getInt("anio");
-		
+		tipoDeCambio=bundle.getFloat("tipoDeCambio");
+		estaEnDolares = bundle.getBoolean("dolares");
 		//AsyncTask que llena el adaptador
 		new llenaLista().execute();
 	}
@@ -90,13 +94,19 @@ public class TotalDeGastos extends Activity {
 	}
 
 	public void agregarIngreso(View view) {
-		startActivity(new Intent(getApplicationContext(),
-				CategoriaIngreso.class));
+		Intent intento = new Intent(getApplicationContext(),
+				CategoriaIngreso.class);
+		intento.putExtra("dolares", estaEnDolares);
+		intento.putExtra("tipoDeCambio",tipoDeCambio);
+		startActivity(intento);
 		finish();
 	}
 
 	public void agregarGasto(View view) {
-		startActivity(new Intent(getApplicationContext(), CategoriaGasto.class));
+		Intent intento = new Intent(getApplicationContext(), CategoriaGasto.class);
+		intento.putExtra("dolares", estaEnDolares);
+		intento.putExtra("tipoDeCambio",tipoDeCambio);
+		startActivity(intento);
 		finish();
 	}
 
@@ -161,7 +171,11 @@ public class TotalDeGastos extends Activity {
 			holder.lugar.setText(gastos.getLugar());
 			holder.lugar.setTag(gastos.getId());
 
-			holder.monto.setText(Integer.toString(gastos.getMonto()));
+			float monto = gastos.getMonto();
+			if(estaEnDolares){
+				monto = monto /tipoDeCambio;
+			}
+			holder.monto.setText(Float.toString(monto));
 			holder.monto.setTag(gastos.getId());
 			String fechaGasto = String.valueOf(gastos.getDia()) + "/"
 					+ String.valueOf(gastos.getMes()) + "/"

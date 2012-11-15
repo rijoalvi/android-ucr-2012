@@ -21,11 +21,15 @@ import android.view.View;
  */
 
 public class CategoriaIngreso extends Activity {
-
+	private float tipoDeCambio;
+	private boolean estaEnDolares;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_categoria_ingreso);
+        Bundle bundle = getIntent().getExtras();
+		tipoDeCambio=bundle.getFloat("tipoDeCambio");
+		estaEnDolares = bundle.getBoolean("dolares");
     }
 
     @Override
@@ -37,42 +41,56 @@ public class CategoriaIngreso extends Activity {
     public void ingresoSalario(View view){
     	Intent intento = new Intent(this, DetallesIngreso.class );
         intento.putExtra("categoria", "1");
+        intento.putExtra("dolares", estaEnDolares);
+		intento.putExtra("tipoDeCambio",tipoDeCambio);
         startActivity(intento);  
     	finish();
     }
     public void ingresoAlquileres(View view){
     	Intent intento = new Intent(this, DetallesIngreso.class );
         intento.putExtra("categoria", "2");
+        intento.putExtra("dolares", estaEnDolares);
+		intento.putExtra("tipoDeCambio",tipoDeCambio);
         startActivity(intento);  
     	finish();
     }
     public void ingresoInversiones(View view){
     	Intent intento = new Intent(this, DetallesIngreso.class );
         intento.putExtra("categoria", "3");
+        intento.putExtra("dolares", estaEnDolares);
+		intento.putExtra("tipoDeCambio",tipoDeCambio);
         startActivity(intento);  
     	finish();
     }
     public void ingresoPensiones(View view){
     	Intent intento = new Intent(this, DetallesIngreso.class );
         intento.putExtra("categoria", "4");
+        intento.putExtra("dolares", estaEnDolares);
+		intento.putExtra("tipoDeCambio",tipoDeCambio);
         startActivity(intento);  
     	finish();
     }
     public void ingresoCobros(View view){
     	Intent intento = new Intent(this, DetallesIngreso.class );
         intento.putExtra("categoria", "5");
+        intento.putExtra("dolares", estaEnDolares);
+		intento.putExtra("tipoDeCambio",tipoDeCambio);
         startActivity(intento);  
     	finish();
     }
     public void ingresoBonos(View view){
     	Intent intento = new Intent(this, DetallesIngreso.class );
         intento.putExtra("categoria", "6");
+        intento.putExtra("dolares", estaEnDolares);
+		intento.putExtra("tipoDeCambio",tipoDeCambio);
         startActivity(intento);  
     	finish();
     }
     public void ingresoReembolsos(View view){
     	Intent intento = new Intent(this, DetallesIngreso.class );
         intento.putExtra("categoria", "7");
+        intento.putExtra("dolares", estaEnDolares);
+		intento.putExtra("tipoDeCambio",tipoDeCambio);
         startActivity(intento);  
     	finish();
     }
@@ -80,6 +98,8 @@ public class CategoriaIngreso extends Activity {
     public void ingresoRegalos(View view){
     	Intent intento = new Intent(this, DetallesIngreso.class );
         intento.putExtra("categoria", "8");
+        intento.putExtra("dolares", estaEnDolares);
+		intento.putExtra("tipoDeCambio",tipoDeCambio);
         startActivity(intento);  
     	finish();
     }
@@ -87,6 +107,8 @@ public class CategoriaIngreso extends Activity {
     public void ingresoOtros(View view){
     	Intent intento = new Intent(this, DetallesIngreso.class );
         intento.putExtra("categoria", "9");
+        intento.putExtra("dolares", estaEnDolares);
+		intento.putExtra("tipoDeCambio",tipoDeCambio);
         startActivity(intento);  
     	finish();
     }

@@ -113,17 +113,29 @@ public final class R {
         public static final int activity_total_de_ingresos=0x7f060008;
     }
     public static final class string {
+        public static final int abril=0x7f040019;
+        public static final int agosto=0x7f04001d;
         public static final int app_name=0x7f040000;
+        public static final int diciembre=0x7f040021;
         public static final int disponible=0x7f040008;
+        public static final int enero=0x7f040016;
+        public static final int febrero=0x7f040017;
         public static final int gastos=0x7f040006;
         public static final int hello_world=0x7f040011;
         public static final int ingresos=0x7f040004;
+        public static final int julio=0x7f04001c;
+        public static final int junio=0x7f04001b;
+        public static final int marzo=0x7f040018;
+        public static final int mayo=0x7f04001a;
         public static final int menos=0x7f040010;
         public static final int menu_settings=0x7f040001;
         public static final int montoDisponible=0x7f040009;
         public static final int montoGastos=0x7f040007;
         public static final int montoIngresos=0x7f040005;
-        public static final int title_activity_barra_inferior=0x7f040016;
+        public static final int noviembre=0x7f040020;
+        public static final int octubre=0x7f04001f;
+        public static final int setiembre=0x7f04001e;
+        public static final int title_activity_barra_inferior=0x7f040022;
         public static final int title_activity_categoria_gasto=0x7f040012;
         public static final int title_activity_categoria_ingreso=0x7f040013;
         public static final int title_activity_detalles_gasto=0x7f040015;

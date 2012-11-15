@@ -19,11 +19,15 @@ import android.view.View;
  * 9.Otros
  */
 public class CategoriaGasto extends Activity {
-
+	private float tipoDeCambio;
+	private boolean estaEnDolares;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_categoria_gasto);
+		Bundle bundle = getIntent().getExtras();
+		tipoDeCambio=bundle.getFloat("tipoDeCambio");
+		estaEnDolares = bundle.getBoolean("dolares");
 	}
 
 	@Override
@@ -35,6 +39,8 @@ public class CategoriaGasto extends Activity {
 	public void gastoTransporte(View view) {
 		Intent intento = new Intent(this, DetallesGasto.class);
 		intento.putExtra("categoria", "1");
+		intento.putExtra("dolares", estaEnDolares);
+		intento.putExtra("tipoDeCambio",tipoDeCambio);
 		startActivity(intento);
 		finish();
 	}
@@ -42,6 +48,8 @@ public class CategoriaGasto extends Activity {
 	public void gastoServicios(View view) {
 		Intent intento = new Intent(this, DetallesGasto.class);
 		intento.putExtra("categoria", "2");
+		intento.putExtra("dolares", estaEnDolares);
+		intento.putExtra("tipoDeCambio",tipoDeCambio);
 		startActivity(intento);
 		finish();
 	}
@@ -49,6 +57,8 @@ public class CategoriaGasto extends Activity {
 	public void gastoAlimentacion(View view) {
 		Intent intento = new Intent(this, DetallesGasto.class);
 		intento.putExtra("categoria", "3");
+		intento.putExtra("dolares", estaEnDolares);
+		intento.putExtra("tipoDeCambio",tipoDeCambio);
 		startActivity(intento);
 		finish();
 	}
@@ -56,6 +66,8 @@ public class CategoriaGasto extends Activity {
 	public void gastoRecreacion(View view) {
 		Intent intento = new Intent(this, DetallesGasto.class);
 		intento.putExtra("categoria", "4");
+		intento.putExtra("dolares", estaEnDolares);
+		intento.putExtra("tipoDeCambio",tipoDeCambio);
 		startActivity(intento);
 		finish();
 	}
@@ -63,6 +75,8 @@ public class CategoriaGasto extends Activity {
 	public void gastoTecnologia(View view) {
 		Intent intento = new Intent(this, DetallesGasto.class);
 		intento.putExtra("categoria", "5");
+		intento.putExtra("dolares", estaEnDolares);
+		intento.putExtra("tipoDeCambio",tipoDeCambio);
 		startActivity(intento);
 		finish();
 	}
@@ -70,6 +84,8 @@ public class CategoriaGasto extends Activity {
 	public void gastoRopa(View view) {
 		Intent intento = new Intent(this, DetallesGasto.class);
 		intento.putExtra("categoria", "6");
+		intento.putExtra("dolares", estaEnDolares);
+		intento.putExtra("tipoDeCambio",tipoDeCambio);
 		startActivity(intento);
 		finish();
 	}
@@ -77,6 +93,8 @@ public class CategoriaGasto extends Activity {
 	public void gastoImpuestos(View view) {
 		Intent intento = new Intent(this, DetallesGasto.class);
 		intento.putExtra("categoria", "7");
+		intento.putExtra("dolares", estaEnDolares);
+		intento.putExtra("tipoDeCambio",tipoDeCambio);
 		startActivity(intento);
 		finish();
 	}
@@ -84,6 +102,8 @@ public class CategoriaGasto extends Activity {
 	public void gastoRegalos(View view) {
 		Intent intento = new Intent(this, DetallesGasto.class);
 		intento.putExtra("categoria", "8");
+		intento.putExtra("dolares", estaEnDolares);
+		intento.putExtra("tipoDeCambio",tipoDeCambio);
 		startActivity(intento);
 		finish();
 	}
@@ -91,6 +111,8 @@ public class CategoriaGasto extends Activity {
 	public void gastoOtros(View view) {
 		Intent intento = new Intent(this, DetallesGasto.class);
 		intento.putExtra("categoria", "9");
+		intento.putExtra("dolares", estaEnDolares);
+		intento.putExtra("tipoDeCambio",tipoDeCambio);
 		startActivity(intento);
 		finish();
 	}
