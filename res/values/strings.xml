@@ -23,5 +23,17 @@
     <string name="title_activity_detalles_ingreso">Ingrese los detalles del Ingreso</string>
     <string name="title_activity_detalles_gasto">Ingrese los detalles del Gasto</string>
     <string name="title_activity_barra_inferior">BarraInferior</string>
+    <string name="enero">Enero</string>
+    <string name="febrero">Febrero</string>
+    <string name="marzo">Marzo</string>
+    <string name="abril">Abril</string>
+    <string name="mayo">Mayo</string>
+    <string name="junio">Junio</string>
+    <string name="julio">Julio</string>
+    <string name="agosto">Agosto</string>
+    <string name="setiembre">Setiembre</string>
+    <string name="octubre">Octubre</string>
+    <string name="noviembre">Nobviembre</string>
+    <string name="diciembre">Diciembre</string>
 
 </resources>

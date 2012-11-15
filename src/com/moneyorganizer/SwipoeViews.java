@@ -2,13 +2,18 @@ package com.moneyorganizer;
 
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 import com.moneyorganizer.conexion.DataParser;
 import com.moneyorganizer.conexion.HTTPClientFactory;
 import com.moneyorganizer.conexion.TipoCambio;
 import com.moneyorganizer.conexion.XPPDataParser;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -21,11 +26,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+import com.moneyorganizer.R;
 
 public class SwipoeViews extends FragmentActivity {
 	public static final String TAG = MainActivity.class.getName();
 	CollectionPagerAdapter mCollectionPagerAdapter;
 	float tipoDeCambio =0;
+	int mes;
+	int anio;
 	 
     /**
      * The {@link android.support.v4.view.ViewPager} that will display the
@@ -55,18 +63,20 @@ public class SwipoeViews extends FragmentActivity {
     // Set up the ViewPager, attaching the adapter.
     mViewPager = (ViewPager) findViewById(R.id.pager);
     mViewPager.setAdapter(mCollectionPagerAdapter);
+    int tempFecha[] = null;
+    tempFecha = getFecha(); 
+    if(tempFecha!=null){
+    	mes = tempFecha[0];
+    	anio = tempFecha[1];
+    }
     
     ParseFileTask task = new ParseFileTask(new XPPDataParser());
 	final Calendar c = Calendar.getInstance();
 	
 	String dia = String.valueOf(c.get(Calendar.DAY_OF_MONTH));
-	
 	String mes =  String.valueOf(c.get(Calendar.MONTH)+1);
-	
 	String anno=  String.valueOf(c.get(Calendar.YEAR));
-	
 	task.execute("http://indicadoreseconomicos.bccr.fi.cr/indicadoreseconomicos/WebServices/wsIndicadoresEconomicos.asmx/ObtenerIndicadoresEconomicosXML?tcIndicador=317&tcFechaInicio="+dia+"%2F"+mes+"%2F"+anno+"&tcFechaFinal="+dia+"%2F"+mes+"%2F"+anno+"&tcNombre=moneyOrganizer&tnSubNiveles=n");
-    
     }
     
 
@@ -114,45 +124,71 @@ public class SwipoeViews extends FragmentActivity {
      * fragment representing an object in the collection.
      */
     public class CollectionPagerAdapter extends FragmentStatePagerAdapter {
- 
-    final int NUM_ITEMS = 3; // number of tabs
- 
-    public CollectionPagerAdapter(FragmentManager fm) {
-        super(fm);
-    }
- 
-    @Override
-    public Fragment getItem(int i) {
-        Fragment fragment = new TabFragment();
-        Bundle args = new Bundle();
-        args.putInt(TabFragment.ARG_OBJECT, i);
-        fragment.setArguments(args);
-        return fragment;
-    }
- 
-    @Override
-    public int getCount() {
-        return NUM_ITEMS;
-    }
- 
-    @Override
-    public CharSequence getPageTitle(int position) {
- 
-        String tabLabel = null;
-        switch (position) {
-        case 0:
-        tabLabel = getString(R.string.title_section1);
-        break;
-        case 1:
-        tabLabel = getString(R.string.title_section2);
-        break;
-        case 2:
-        tabLabel = getString(R.string.title_section3);
-        break;
-        }
- 
-        return tabLabel;
-    }
+    	
+    	int NUM_ITEMS = 14; // number of tabs
+	 
+	    public CollectionPagerAdapter(FragmentManager fm) {
+	        super(fm);
+	    }
+	 
+	    @Override
+	    public Fragment getItem(int i) {
+	        Fragment fragment = new TabFragment();
+	        Bundle args = new Bundle();
+	        args.putInt(TabFragment.ARG_OBJECT, i);
+	        fragment.setArguments(args);
+	        return fragment;
+	    }
+	 
+	    @Override
+	    public int getCount() {
+	        return NUM_ITEMS;
+	    }
+	 
+	    @Override
+	    public CharSequence getPageTitle(int position) {
+	    	String tabLabel = null;
+	        switch (position%12) {
+			case 0:
+				tabLabel = getString(R.string.enero)+" - "+anio;
+				break;
+			case 1:
+				tabLabel = getString(R.string.febrero)+" - "+anio;
+				break;
+			case 2:
+				tabLabel = getString(R.string.marzo)+" - "+anio;
+				break;
+			case 3:
+				tabLabel = getString(R.string.abril)+" - "+anio;
+				break;
+			case 4:
+				tabLabel = getString(R.string.mayo)+" - "+anio;
+				break;
+			case 5:
+				tabLabel = getString(R.string.junio)+" - "+anio;
+				break;
+			case 6:
+				tabLabel = getString(R.string.julio)+" - "+anio;
+				break;
+			case 7:
+				tabLabel = getString(R.string.agosto)+" - "+anio;
+				break;
+			case 8:
+				tabLabel = getString(R.string.setiembre)+" - "+anio;
+				break;
+			case 9:
+				tabLabel = getString(R.string.octubre)+" - "+anio;
+				break;
+			case 10:
+				tabLabel = getString(R.string.noviembre)+" - "+anio;
+				break;
+			case 11:
+				tabLabel = getString(R.string.diciembre)+" - "+anio;
+				break;
+	        }
+	 
+	        return tabLabel;
+	    }
     }
  
     /**
@@ -171,21 +207,82 @@ public class SwipoeViews extends FragmentActivity {
         int position = args.getInt(ARG_OBJECT);
  
         int tabLayout = 0;
-        switch (position) {
-        case 0:
-        tabLayout = R.layout.activity_pantalla_principal;
-        break;
-        case 1:
-        tabLayout = R.layout.activity_pantalla_principal;
-        break;
-        case 2:
-        tabLayout = R.layout.activity_pantalla_principal;
-        break;
-        }
+//        switch (position) {
+//			case 0:
+				tabLayout = R.layout.activity_pantalla_principal;
+//				break;
+//			
+//        }
  
         View rootView = inflater.inflate(tabLayout, container, false);
- 
+        //TextView rootView = new TextView(getActivity());//inflater.inflate(tabLayout, container, false);
+        //rootView.setText("Prueba "+position);
         return rootView;
 		}
+	}
+    
+    @SuppressWarnings("deprecation")
+	public void cargarDetalles(View view) {
+		AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+		alertDialog.setTitle("Detalles");
+		alertDialog.setMessage("Seleccione una categoría de detalles:");
+		// alertDialog.setIcon(R.drawable.search);
+		alertDialog.setButton("Gasto", new DialogInterface.OnClickListener() {
+			public void onClick(final DialogInterface dialog, final int which) {
+				Intent intento = new Intent(getApplicationContext(),
+						TotalDeGastos.class);
+				int fecha[] = getFecha();
+				if (fecha != null) {
+					intento.putExtra("mes", fecha[0]);
+					intento.putExtra("anio", fecha[1]);
+				}
+				startActivity(intento);
+				return;
+			}
+		});
+		alertDialog.setButton2("Ingreso",
+				new DialogInterface.OnClickListener() {
+					public void onClick(final DialogInterface dialog,
+							final int which) {
+
+						Intent intento = new Intent(getApplicationContext(),
+								TotalDeIngresos.class);
+						int fecha[] = getFecha();
+						if (fecha != null) {
+							intento.putExtra("mes", fecha[0]);
+							intento.putExtra("anio", fecha[1]);
+							startActivity(intento);
+						}
+					}
+				});
+		alertDialog.show();
+	}
+
+	public int[] getFecha() {  //HAY QUE ARREGLAARLO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		int respuesta[] = new int[2];
+		SimpleDateFormat dateFormat = new SimpleDateFormat(
+				"yyyy-MM-dd HH:mm:ss");
+		Date date = new Date();
+		String fecha = null;
+		fecha = dateFormat.format(date);
+		String temp[] = fecha.split(" ");
+		String fechaDigitos[] = null;
+		String horaDigitos[] = null;
+		if (temp.length > 1) {
+			fechaDigitos = temp[0].split("-");
+			respuesta[0] = Integer.parseInt(fechaDigitos[1]);
+			respuesta[1] = Integer.parseInt(fechaDigitos[0]);
+			return respuesta;
+		}
+		return null;
+	}
+
+	public void agregarIngreso(View view) {
+		startActivity(new Intent(getApplicationContext(),
+				CategoriaIngreso.class));
+	}
+
+	public void agregarGasto(View view) {
+		startActivity(new Intent(getApplicationContext(), CategoriaGasto.class));
 	}
 }
