@@ -35,15 +35,14 @@ public class TotalDeGastos extends Activity {
 
 	private float tipoDeCambio;
 	private boolean estaEnDolares;
-	
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_total_de_gastos);
-		
+
 		ListView listaGastos = (ListView) findViewById(R.id.lista_gastos);
-		listaGastos.setAdapter(new GastoAdapter(this,
-				new ArrayList<Gasto>()));
+		listaGastos.setAdapter(new GastoAdapter(this, new ArrayList<Gasto>()));
 		listaGastos.setOnItemLongClickListener(new OnItemLongClickListener() {
 
 			@Override
@@ -58,17 +57,19 @@ public class TotalDeGastos extends Activity {
 				builder.setPositiveButton("Si",
 						new DialogInterface.OnClickListener() {
 							@Override
-							public void onClick(DialogInterface dialog, int which) {
+							public void onClick(DialogInterface dialog,
+									int which) {
 								Log.d("", "Borrando Gasto");
 								new Borrador().execute(listoParaEliminar);
-								listoParaEliminar= null;
+								listoParaEliminar = null;
 							}
 						});
 
 				builder.setNegativeButton("No",
 						new DialogInterface.OnClickListener() {
 							@Override
-							public void onClick(DialogInterface dialog, int which) {
+							public void onClick(DialogInterface dialog,
+									int which) {
 								listoParaEliminar = null;
 							}
 						});
@@ -78,14 +79,13 @@ public class TotalDeGastos extends Activity {
 				return true;
 			}
 		});
-		
-		
+
 		Bundle bundle = getIntent().getExtras();
 		mes = bundle.getInt("mes");
 		anio = bundle.getInt("anio");
-		tipoDeCambio=bundle.getFloat("tipoDeCambio");
+		tipoDeCambio = bundle.getFloat("tipoDeCambio");
 		estaEnDolares = bundle.getBoolean("dolares");
-		//AsyncTask que llena el adaptador
+		// AsyncTask que llena el adaptador
 		new llenaLista().execute();
 	}
 
@@ -99,15 +99,16 @@ public class TotalDeGastos extends Activity {
 		Intent intento = new Intent(getApplicationContext(),
 				CategoriaIngreso.class);
 		intento.putExtra("dolares", estaEnDolares);
-		intento.putExtra("tipoDeCambio",tipoDeCambio);
+		intento.putExtra("tipoDeCambio", tipoDeCambio);
 		startActivity(intento);
 		finish();
 	}
 
 	public void agregarGasto(View view) {
-		Intent intento = new Intent(getApplicationContext(), CategoriaGasto.class);
+		Intent intento = new Intent(getApplicationContext(),
+				CategoriaGasto.class);
 		intento.putExtra("dolares", estaEnDolares);
-		intento.putExtra("tipoDeCambio",tipoDeCambio);
+		intento.putExtra("tipoDeCambio", tipoDeCambio);
 		startActivity(intento);
 		finish();
 	}
@@ -163,9 +164,11 @@ public class TotalDeGastos extends Activity {
 
 				holder = new GastoViewHolder();
 				convertView.setTag(holder);
-				holder.lugar = (TextView) convertView.findViewById(R.id.lugar_fuente);
+				holder.lugar = (TextView) convertView
+						.findViewById(R.id.lugar_fuente);
 				holder.monto = (TextView) convertView.findViewById(R.id.monto);
 				holder.fecha = (TextView) convertView.findViewById(R.id.fecha);
+				holder.imagenGasto = (ImageView) convertView.findViewById(R.id.imagen);
 			} else {
 				holder = (GastoViewHolder) convertView.getTag();
 			}
@@ -174,8 +177,8 @@ public class TotalDeGastos extends Activity {
 			holder.lugar.setTag(gastos.getId());
 
 			float monto = gastos.getMonto();
-			if(estaEnDolares){
-				monto = monto /tipoDeCambio;
+			if (estaEnDolares) {
+				monto = monto / tipoDeCambio;
 			}
 			holder.monto.setText(Float.toString(monto));
 			holder.monto.setTag(gastos.getId());
@@ -184,8 +187,43 @@ public class TotalDeGastos extends Activity {
 					+ String.valueOf(gastos.getAnio());
 			holder.fecha.setText(fechaGasto);
 			holder.fecha.setTag(gastos.getId());
+			int tipo = gastos.getTipo();
+			setImage(tipo, holder);
 			return convertView;
 		}
+
+		public void setImage(int tipo, GastoViewHolder holder) {
+			switch (tipo) {
+			case 1:
+				holder.imagenGasto.setImageResource(R.drawable.transporte);
+				break;
+			case 2:
+				holder.imagenGasto.setImageResource(R.drawable.servicios);
+				break;
+			case 3:
+				holder.imagenGasto.setImageResource(R.drawable.alimentacion);
+				break;
+			case 4:
+				holder.imagenGasto.setImageResource(R.drawable.recreacion);
+				break;
+			case 5:
+				holder.imagenGasto.setImageResource(R.drawable.tecnologia);
+				break;
+			case 6:
+				holder.imagenGasto.setImageResource(R.drawable.ropa);
+				break;
+			case 7:
+				holder.imagenGasto.setImageResource(R.drawable.impuestos);
+				break;
+			case 8:
+				holder.imagenGasto.setImageResource(R.drawable.regalos);
+				break;
+			case 9:
+				holder.imagenGasto.setImageResource(R.drawable.otros);
+				break;
+			}
+		}
+
 	}
 
 	private static class GastoViewHolder {
@@ -194,23 +232,23 @@ public class TotalDeGastos extends Activity {
 		public TextView lugar;
 		public ImageView imagenGasto;
 	}
-	
+
 	private class Borrador extends AsyncTask<Gasto, Void, Boolean> {
 
 		public Borrador() {
-			
+
 		}
 
 		@Override
 		protected Boolean doInBackground(Gasto... params) {
-			
+
 			Gasto gastoABorrar = null;
 			gastoABorrar = params[0];
-			
 
 			if (gastoABorrar != null) {
-				ControladorBD controlador = new ControladorBD(TotalDeGastos.this);
-					return controlador.borrarGasto(gastoABorrar);
+				ControladorBD controlador = new ControladorBD(
+						TotalDeGastos.this);
+				return controlador.borrarGasto(gastoABorrar);
 			}
 
 			return null;
@@ -236,13 +274,13 @@ public class TotalDeGastos extends Activity {
 		}
 
 	}
-	
-	private class llenaLista extends AsyncTask<Void, Void, List<Gasto>>{
 
-		public llenaLista(){
-			
+	private class llenaLista extends AsyncTask<Void, Void, List<Gasto>> {
+
+		public llenaLista() {
+
 		}
-		
+
 		@Override
 		protected List<Gasto> doInBackground(Void... params) {
 			List<Gasto> losGastos = new ArrayList<Gasto>();
@@ -259,10 +297,10 @@ public class TotalDeGastos extends Activity {
 		}
 
 	}
-	
+
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) {
-	    super.onConfigurationChanged(newConfig);
-	    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+		super.onConfigurationChanged(newConfig);
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 	}
 }
