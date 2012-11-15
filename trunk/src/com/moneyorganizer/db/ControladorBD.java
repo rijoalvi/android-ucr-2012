@@ -186,7 +186,7 @@ public class ControladorBD implements ConstantesBD {
 						.getColumnIndex(ColumnaIngresos.MES)));
 				int anioIngreso = Integer.parseInt(cursor.getString(cursor
 						.getColumnIndex(ColumnaIngresos.ANIO)));
-				float montoIngreso = Integer.parseInt(cursor.getString(cursor
+				float montoIngreso = Float.parseFloat(cursor.getString(cursor
 						.getColumnIndex(ColumnaIngresos.MONTO)));
 				String fuenteIngreso = cursor.getString(cursor
 						.getColumnIndex(ColumnaIngresos.FUENTE));
@@ -281,7 +281,7 @@ public class ControladorBD implements ConstantesBD {
 					.getColumnIndex(ColumnaGastos.MES)));
 			int anioGasto = Integer.parseInt(cursor.getString(cursor
 					.getColumnIndex(ColumnaGastos.ANIO)));
-			float montoGasto = Integer.parseInt(cursor.getString(cursor
+			float montoGasto = Float.parseFloat(cursor.getString(cursor
 					.getColumnIndex(ColumnaGastos.MONTO)));
 			String lugarGasto = cursor.getString(cursor
 					.getColumnIndex(ColumnaGastos.LUGAR));
@@ -323,7 +323,7 @@ public class ControladorBD implements ConstantesBD {
 						.getColumnIndex(ColumnaGastos.MES)));
 				int anioGasto = Integer.parseInt(cursor.getString(cursor
 						.getColumnIndex(ColumnaGastos.ANIO)));
-				float montoGasto = Integer.parseInt(cursor.getString(cursor
+				float montoGasto = Float.parseFloat(cursor.getString(cursor
 						.getColumnIndex(ColumnaGastos.MONTO)));
 				String lugarGasto = cursor.getString(cursor
 						.getColumnIndex(ColumnaGastos.LUGAR));
@@ -368,7 +368,7 @@ public class ControladorBD implements ConstantesBD {
 						.getColumnIndex(ColumnaGastos.MES)));
 				int anioGasto = Integer.parseInt(cursor.getString(cursor
 						.getColumnIndex(ColumnaGastos.ANIO)));
-				float montoGasto = Integer.parseInt(cursor.getString(cursor
+				float montoGasto = Float.parseFloat(cursor.getString(cursor
 						.getColumnIndex(ColumnaGastos.MONTO)));
 				String lugarGasto = cursor.getString(cursor
 						.getColumnIndex(ColumnaGastos.LUGAR));
@@ -412,7 +412,7 @@ public class ControladorBD implements ConstantesBD {
 						.getColumnIndex(ColumnaGastos.MES)));
 				int anioGasto = Integer.parseInt(cursor.getString(cursor
 						.getColumnIndex(ColumnaGastos.ANIO)));
-				float montoGasto = Integer.parseInt(cursor.getString(cursor
+				float montoGasto = Float.parseFloat(cursor.getString(cursor
 						.getColumnIndex(ColumnaGastos.MONTO)));
 				String lugarGasto = cursor.getString(cursor
 						.getColumnIndex(ColumnaGastos.LUGAR));

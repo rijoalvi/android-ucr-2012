@@ -6,7 +6,8 @@
     <uses-sdk
         android:minSdkVersion="9"
         android:targetSdkVersion="15" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:icon="@drawable/ic_launcher"
@@ -14,14 +15,17 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".MainActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_main" >
         </activity>
         <activity
             android:name=".PantallaPrincipal"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_pantalla_principal" >
         </activity>
         <activity
             android:name="SwipoeViews"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_swipoe_views" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,30 +35,37 @@
         </activity>
         <activity
             android:name=".TotalDeGastos"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_total_de_gastos" >
         </activity>
         <activity
             android:name=".TotalDeIngresos"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_total_de_ingresos" >
         </activity>
         <activity
             android:name=".CategoriaGasto"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_categoria_gasto" >
         </activity>
         <activity
             android:name=".CategoriaIngreso"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_categoria_ingreso" >
         </activity>
         <activity
             android:name=".DetallesIngreso"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_detalles_ingreso" >
         </activity>
         <activity
             android:name=".DetallesGasto"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_detalles_gasto" >
         </activity>
         <activity
             android:name=".BarraInferior"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_barra_inferior" >
         </activity>
     </application>

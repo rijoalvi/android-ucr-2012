@@ -2,6 +2,8 @@ package com.moneyorganizer;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.view.Menu;
 
 public class PantallaPrincipal extends Activity {
@@ -16,6 +18,12 @@ public class PantallaPrincipal extends Activity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.activity_pantalla_principal, menu);
 		return true;
+	}
+	
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+	    super.onConfigurationChanged(newConfig);
+	    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 	}
 
 }

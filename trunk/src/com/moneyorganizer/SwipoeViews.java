@@ -1,6 +1,5 @@
 package com.moneyorganizer;
 
-
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -14,6 +13,8 @@ import com.moneyorganizer.conexion.XPPDataParser;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -31,55 +32,74 @@ import com.moneyorganizer.R;
 public class SwipoeViews extends FragmentActivity {
 	public static final String TAG = MainActivity.class.getName();
 	CollectionPagerAdapter mCollectionPagerAdapter;
+	float tipoDeCambio = 0;
 	boolean estaEnDolares = false;
-	float tipoDeCambio =0;
 	int mes;
 	int anio;
-	 
-    /**
-     * The {@link android.support.v4.view.ViewPager} that will display the
-     * object collection.
-     */
-    ViewPager mViewPager;
- 
-    public void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_swipoe_views);
- 
-    // Create an adapter that when requested, will return a fragment
-    // representing an object in
-    // the collection.
-    //
-    // ViewPager and its adapters use support library fragments, so we must
-    // use
-    // getSupportFragmentManager.
-    mCollectionPagerAdapter = new CollectionPagerAdapter(
-        getSupportFragmentManager());
- 
-    // Set up action bar.
-    // Specify that the Home button should show an "Up" caret, indicating
-    // that touching the
-    // button will take the user one step up in the application's hierarchy.
- 
-    // Set up the ViewPager, attaching the adapter.
-    mViewPager = (ViewPager) findViewById(R.id.pager);
-    mViewPager.setAdapter(mCollectionPagerAdapter);
-    int tempFecha[] = null;
-    tempFecha = getFecha(); 
-    if(tempFecha!=null){
-    	mes = tempFecha[0];
-    	anio = tempFecha[1];
-    }
-    
-    ParseFileTask task = new ParseFileTask(new XPPDataParser());
-	final Calendar c = Calendar.getInstance();
-	
-	String dia = String.valueOf(c.get(Calendar.DAY_OF_MONTH));
-	String mes =  String.valueOf(c.get(Calendar.MONTH)+1);
-	String anno=  String.valueOf(c.get(Calendar.YEAR));
-	task.execute("http://indicadoreseconomicos.bccr.fi.cr/indicadoreseconomicos/WebServices/wsIndicadoresEconomicos.asmx/ObtenerIndicadoresEconomicosXML?tcIndicador=317&tcFechaInicio="+dia+"%2F"+mes+"%2F"+anno+"&tcFechaFinal="+dia+"%2F"+mes+"%2F"+anno+"&tcNombre=moneyOrganizer&tnSubNiveles=n");
-    }
-    
+	int posInicial;
+	int posAnterior;
+	int posActual;
+
+	/**
+	 * The {@link android.support.v4.view.ViewPager} that will display the
+	 * object collection.
+	 */
+	ViewPager mViewPager;
+
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_swipoe_views);
+
+		// Create an adapter that when requested, will return a fragment
+		// representing an object in
+		// the collection.
+		//
+		// ViewPager and its adapters use support library fragments, so we must
+		// use
+		// getSupportFragmentManager.
+		mCollectionPagerAdapter = new CollectionPagerAdapter(
+				getSupportFragmentManager());
+
+		int tempFecha[] = null;
+		tempFecha = getFechaActual();
+		if (tempFecha != null) {
+			mes = tempFecha[0];
+			anio = tempFecha[1];
+		}
+		// Set up action bar.
+		// Specify that the Home button should show an "Up" caret, indicating
+		// that touching the
+		// button will take the user one step up in the application's hierarchy.
+
+		// Set up the ViewPager, attaching the adapter.
+		mViewPager = (ViewPager) findViewById(R.id.pager);
+		mViewPager.setAdapter(mCollectionPagerAdapter);
+		posInicial = (mes + 107);
+		posAnterior = posInicial;
+		mViewPager.setCurrentItem(posInicial);
+		Log.d("", "MES: " + String.valueOf(mes));
+		// mViewPager.set
+
+		ParseFileTask task = new ParseFileTask(new XPPDataParser());
+		final Calendar c = Calendar.getInstance();
+
+		String dia = String.valueOf(c.get(Calendar.DAY_OF_MONTH));
+		String mes = String.valueOf(c.get(Calendar.MONTH) + 1);
+		String anno = String.valueOf(c.get(Calendar.YEAR));
+		task.execute("http://indicadoreseconomicos.bccr.fi.cr/indicadoreseconomicos/WebServices/wsIndicadoresEconomicos.asmx/ObtenerIndicadoresEconomicosXML?tcIndicador=317&tcFechaInicio="
+				+ dia
+				+ "%2F"
+				+ mes
+				+ "%2F"
+				+ anno
+				+ "&tcFechaFinal="
+				+ dia
+				+ "%2F"
+				+ mes
+				+ "%2F"
+				+ anno
+				+ "&tcNombre=moneyOrganizer&tnSubNiveles=n");
+	}
 
 	class ParseFileTask extends AsyncTask<String, Void, TipoCambio> {
 
@@ -93,13 +113,13 @@ public class SwipoeViews extends FragmentActivity {
 		protected TipoCambio doInBackground(String... params) {
 			TipoCambio tc = new TipoCambio();
 			HTTPClientFactory httpCF = new HTTPClientFactory();
-			String url=params[0];
+			String url = params[0];
 			try {
 				tc = parser.parseUser(httpCF.getInputStreamFromHttpClient(url));
 				return tc;
 			} catch (IOException e) {
 				Log.e(TAG, e.getMessage(), e);
-			} 
+			}
 			return null;
 		}
 
@@ -108,8 +128,9 @@ public class SwipoeViews extends FragmentActivity {
 				tipoDeCambio = Float.valueOf(result.getValor());
 				Log.d(TAG, "RESULTADO: " + tipoDeCambio);
 			} else {
-				Toast.makeText(SwipoeViews.this, "No se pudo realizar la conexión",
-						Toast.LENGTH_SHORT).show();
+				Toast.makeText(SwipoeViews.this,
+						"No se pudo realizar la conexión", Toast.LENGTH_SHORT)
+						.show();
 			}
 			super.onPostExecute(result);
 		}
@@ -118,110 +139,153 @@ public class SwipoeViews extends FragmentActivity {
 			super.onPreExecute();
 		}
 	}
- 
-	
-    /**
-     * A {@link android.support.v4.app.FragmentStatePagerAdapter} that returns a
-     * fragment representing an object in the collection.
-     */
-    public class CollectionPagerAdapter extends FragmentStatePagerAdapter {
-    	
-    	int NUM_ITEMS = 14; // number of tabs
-	 
-	    public CollectionPagerAdapter(FragmentManager fm) {
-	        super(fm);
-	    }
-	 
-	    @Override
-	    public Fragment getItem(int i) {
-	        Fragment fragment = new TabFragment();
-	        Bundle args = new Bundle();
-	        args.putInt(TabFragment.ARG_OBJECT, i);
-	        fragment.setArguments(args);
-	        return fragment;
-	    }
-	 
-	    @Override
-	    public int getCount() {
-	        return NUM_ITEMS;
-	    }
-	 
-	    @Override
-	    public CharSequence getPageTitle(int position) {
-	    	String tabLabel = null;
-	        switch (position%12) {
+
+	/**
+	 * A {@link android.support.v4.app.FragmentStatePagerAdapter} that returns a
+	 * fragment representing an object in the collection.
+	 */
+	public class CollectionPagerAdapter extends FragmentStatePagerAdapter {
+
+		int cantItems = 132; // number of tabs
+		int posActual = -1;
+
+		public CollectionPagerAdapter(FragmentManager fm) {
+			super(fm);
+		}
+
+		@Override
+		public Fragment getItem(int i) {
+			calcularFecha(i);
+			// ("", "posActual: "+String.valueOf(i));
+			Fragment fragment = new TabFragment();
+			Bundle args = new Bundle();
+			args.putInt(TabFragment.ARG_OBJECT, i);
+			fragment.setArguments(args);
+
+			return fragment;
+		}
+
+		@Override
+		public int getCount() {
+			return cantItems;
+		}
+
+		@Override
+		public CharSequence getPageTitle(int position) {
+			String tabLabel = null;
+
+			if (position > 118) {
+				cantItems++;
+			}
+			switch (position % 12) {
 			case 0:
-				tabLabel = getString(R.string.enero)+" - "+anio;
+				if (posAnterior < position) {
+					tabLabel = getString(R.string.enero) + " - " + (anio + 1);
+					Toast.makeText(SwipoeViews.this, "enerous", 3000).show();
+				} else {
+					tabLabel = getString(R.string.enero) + " - " + anio;
+				}
 				break;
 			case 1:
-				tabLabel = getString(R.string.febrero)+" - "+anio;
+				tabLabel = getString(R.string.febrero) + " - " + anio;
 				break;
 			case 2:
-				tabLabel = getString(R.string.marzo)+" - "+anio;
+				tabLabel = getString(R.string.marzo) + " - " + anio;
 				break;
 			case 3:
-				tabLabel = getString(R.string.abril)+" - "+anio;
+				tabLabel = getString(R.string.abril) + " - " + anio;
 				break;
 			case 4:
-				tabLabel = getString(R.string.mayo)+" - "+anio;
+				tabLabel = getString(R.string.mayo) + " - " + anio;
 				break;
 			case 5:
-				tabLabel = getString(R.string.junio)+" - "+anio;
+				tabLabel = getString(R.string.junio) + " - " + anio;
 				break;
 			case 6:
-				tabLabel = getString(R.string.julio)+" - "+anio;
+				tabLabel = getString(R.string.julio) + " - " + anio;
 				break;
 			case 7:
-				tabLabel = getString(R.string.agosto)+" - "+anio;
+				tabLabel = getString(R.string.agosto) + " - " + anio;
 				break;
 			case 8:
-				tabLabel = getString(R.string.setiembre)+" - "+anio;
+				tabLabel = getString(R.string.setiembre) + " - " + anio;
 				break;
 			case 9:
-				tabLabel = getString(R.string.octubre)+" - "+anio;
+				tabLabel = getString(R.string.octubre) + " - " + anio;
 				break;
 			case 10:
-				tabLabel = getString(R.string.noviembre)+" - "+anio;
+				tabLabel = getString(R.string.noviembre) + " - " + anio;
 				break;
 			case 11:
-				tabLabel = getString(R.string.diciembre)+" - "+anio;
+				if (posAnterior > position) {
+					tabLabel = getString(R.string.diciembre) + " - "
+							+ (anio - 1);
+					Toast.makeText(SwipoeViews.this, "diciember", 3000).show();
+				} else {
+					tabLabel = getString(R.string.diciembre) + " - " + anio;
+				}
 				break;
-	        }
-	 
-	        return tabLabel;
-	    }
-    }
- 
-    /**
-     * A dummy fragment representing a section of the app, but that simply
-     * displays dummy text.
-     */
-    public static class TabFragment extends Fragment {
- 
-    public static final String ARG_OBJECT = "object";
- 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-        Bundle savedInstanceState) {
- 
-        Bundle args = getArguments();
-        int position = args.getInt(ARG_OBJECT);
- 
-        int tabLayout = 0;
-//        switch (position) {
-//			case 0:
-				tabLayout = R.layout.activity_pantalla_principal;
-//				break;
-//			
-//        }
-        View rootView = inflater.inflate(tabLayout, container, false);
-        //TextView rootView = new TextView(getActivity());//inflater.inflate(tabLayout, container, false);
-        //rootView.setText("Prueba "+position);
-        return rootView;
+			}
+
+			return tabLabel;
+		}
+		private void calcularFecha(int i) {
+			if (i > posAnterior) {
+				mes++;
+				if (mes == 13) {
+					anio++;
+					mes = 1;
+				}
+			}
+			if (i < posAnterior) {
+				mes--;
+				if (mes == 0) {
+					anio--;
+					mes = 12;
+				}
+			}
+			Log.d("", "posAnt " + String.valueOf(posAnterior));
+			Log.d("", "posAct " + String.valueOf(i));
+			Log.d("", "mes " + String.valueOf(mes));
+			Log.d("", "anio " + String.valueOf(anio));
+			posAnterior = i;
+			posActual = i;
 		}
 	}
-    
-    @SuppressWarnings("deprecation")
+
+	/**
+	 * A dummy fragment representing a section of the app, but that simply
+	 * displays dummy text.
+	 */
+	public static class TabFragment extends Fragment {
+
+		public static final String ARG_OBJECT = "object";
+
+		@Override
+		public View onCreateView(LayoutInflater inflater, ViewGroup container,
+				Bundle savedInstanceState) {
+
+			Bundle args = getArguments();
+			int position = args.getInt(ARG_OBJECT);
+
+			int tabLayout = 0;
+			// switch (position) {
+			// case 0:
+			tabLayout = R.layout.activity_pantalla_principal;
+			// break;
+			//
+			// }
+			View rootView = inflater.inflate(tabLayout, container, false);
+			// TextView rootView = new
+			// TextView(getActivity());//inflater.inflate(tabLayout, container,
+			// false);
+			// rootView.setText("Prueba "+position);
+			return rootView;
+		}
+		
+	}
+
+	@SuppressWarnings("deprecation")
 	public void cargarDetalles(View view) {
 		AlertDialog alertDialog = new AlertDialog.Builder(this).create();
 		alertDialog.setTitle("Detalles");
@@ -231,13 +295,11 @@ public class SwipoeViews extends FragmentActivity {
 			public void onClick(final DialogInterface dialog, final int which) {
 				Intent intento = new Intent(getApplicationContext(),
 						TotalDeGastos.class);
+				intento.putExtra("mes", mes);
+				intento.putExtra("anio", anio);
 				intento.putExtra("dolares", estaEnDolares);
-				intento.putExtra("tipoDeCambio",tipoDeCambio);
-				int fecha[] = getFecha();
-				if (fecha != null) {
-					intento.putExtra("mes", fecha[0]);
-					intento.putExtra("anio", fecha[1]);
-				}
+				intento.putExtra("tipoDeCambio", tipoDeCambio);
+
 				startActivity(intento);
 				return;
 			}
@@ -249,20 +311,21 @@ public class SwipoeViews extends FragmentActivity {
 
 						Intent intento = new Intent(getApplicationContext(),
 								TotalDeIngresos.class);
+
+						intento.putExtra("mes", mes);
+						intento.putExtra("anio", anio);
+
 						intento.putExtra("dolares", estaEnDolares);
-						intento.putExtra("tipoDeCambio",tipoDeCambio);
-						int fecha[] = getFecha();
-						if (fecha != null) {
-							intento.putExtra("mes", fecha[0]);
-							intento.putExtra("anio", fecha[1]);
-							startActivity(intento);
-						}
+						intento.putExtra("tipoDeCambio", tipoDeCambio);
+
+						startActivity(intento);
 					}
 				});
 		alertDialog.show();
 	}
 
-	public int[] getFecha() {  //HAY QUE ARREGLAARLO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	public int[] getFechaActual() { // HAY QUE
+		// ARREGLAARLO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		int respuesta[] = new int[2];
 		SimpleDateFormat dateFormat = new SimpleDateFormat(
 				"yyyy-MM-dd HH:mm:ss");
@@ -282,17 +345,36 @@ public class SwipoeViews extends FragmentActivity {
 	}
 
 	public void agregarIngreso(View view) {
-		Intent intento=new Intent(getApplicationContext(),
+		Intent intento = new Intent(getApplicationContext(),
 				CategoriaIngreso.class);
 		intento.putExtra("dolares", estaEnDolares);
-		intento.putExtra("tipoDeCambio",tipoDeCambio);
+		intento.putExtra("tipoDeCambio", tipoDeCambio);
 		startActivity(intento);
 	}
 
 	public void agregarGasto(View view) {
-		Intent intento=new Intent(getApplicationContext(), CategoriaGasto.class);
+		Intent intento = new Intent(getApplicationContext(),
+				CategoriaGasto.class);
 		intento.putExtra("dolares", estaEnDolares);
-		intento.putExtra("tipoDeCambio",tipoDeCambio);
+		intento.putExtra("tipoDeCambio", tipoDeCambio);
 		startActivity(intento);
 	}
+
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+		super.onConfigurationChanged(newConfig);
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+	}
+
+	// public int calcularAnio(){
+	// Log.d("","Inicial"+String.valueOf(posInicial));
+	// int resp;
+	// if(mCollectionPagerAdapter.posActual != -1){
+	// resp = (mes+(mCollectionPagerAdapter.posActual - posInicial)/12);
+	// }
+	// else{
+	// resp = 0;
+	// }
+	// return resp;
+	// }
 }
