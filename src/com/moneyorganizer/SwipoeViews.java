@@ -9,6 +9,7 @@ import com.moneyorganizer.conexion.DataParser;
 import com.moneyorganizer.conexion.HTTPClientFactory;
 import com.moneyorganizer.conexion.TipoCambio;
 import com.moneyorganizer.conexion.XPPDataParser;
+import com.moneyorganizer.db.ControladorBD;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -69,6 +70,14 @@ public class SwipoeViews extends FragmentActivity {
 			mes = tempFecha[0];
 			anio = tempFecha[1];
 		}
+		ControladorBD controlador = new ControladorBD(SwipoeViews.this);
+		float f = controlador.getDisponible();
+//		Log.d("","DISPONIBLE = "+String.valueOf(f));
+		
+		float resp = controlador.getTotalGastosDelMes(11, 2012);
+//		Log.d("","Egresos = "+String.valueOf(resp));
+		
+//		Toast.makeText(SwipoeViews.this, "Gastos: "+resp, Toast.LENGTH_SHORT).show();
 		// Set up action bar.
 		// Specify that the Home button should show an "Up" caret, indicating
 		// that touching the
@@ -80,8 +89,7 @@ public class SwipoeViews extends FragmentActivity {
 		posInicial = (mes + 107);
 		posAnterior = posInicial;
 		mViewPager.setCurrentItem(posInicial);
-		Log.d("", "MES: " + String.valueOf(mes));
-		// mViewPager.set
+//		Log.d("", "MES: " + String.valueOf(mes));
 
 		ParseFileTask task = new ParseFileTask(new XPPDataParser());
 		final Calendar c = Calendar.getInstance();
@@ -132,7 +140,7 @@ public class SwipoeViews extends FragmentActivity {
 				Log.d(TAG, "RESULTADO: " + tipoDeCambio);
 			} else {
 				Toast.makeText(SwipoeViews.this,
-						"No se pudo realizar la conexión", Toast.LENGTH_SHORT)
+						"No se pudo realizar la conexion", Toast.LENGTH_SHORT)
 						.show();
 			}
 			super.onPostExecute(result);
@@ -160,17 +168,25 @@ public class SwipoeViews extends FragmentActivity {
 		public Fragment getItem(int i) {
 			calcularFecha(i);
 			// ("", "posActual: "+String.valueOf(i));
-			Fragment fragment = new TabFragment();
+			TabFragment fragment = new TabFragment();
 			Bundle args = new Bundle();
 			args.putInt(TabFragment.ARG_OBJECT, i);
-			int ingresos = 500+i;
-			int gastos = 320+i;
-			int disponible = ingresos-gastos;
 			
-			args.putInt("ingresos", ingresos);
-			args.putInt("ingresos", gastos);
-			args.putInt("ingresos", disponible);
+			ControladorBD controlador = new ControladorBD(SwipoeViews.this);
+			float ingresos = controlador.getTotalIngresosDelMes(mes, anio);
+			float gastos = controlador.getTotalGastosDelMes(mes, anio);
+			float disponible = controlador.getDisponible();
+			
+			Log.d("","Fecha "+mes+" "+anio);
+			args.putFloat("ingresos", ingresos);
+			Log.d("","Ingresos "+ingresos);
+			args.putFloat("gastos", gastos);
+			Log.d("","Gastos "+gastos);
+			args.putFloat("disponible", disponible);
+			Log.d("","Disponible "+disponible);
 			fragment.setArguments(args);
+			
+			//fragment.setArgs(ingresos, gastos, disponible);
 
 			return fragment;
 		}
@@ -189,15 +205,20 @@ public class SwipoeViews extends FragmentActivity {
 			}
 			switch (position % 12) {
 			case 0:
-				if (posAnterior < position) {
+				if ((mes >= 11)&&((position%12)<mes)) {
 					tabLabel = getString(R.string.enero) + " - " + (anio + 1);
-					Toast.makeText(SwipoeViews.this, "enerous", 3000).show();
+//					Toast.makeText(SwipoeViews.this, "enerous", 3000).show();
 				} else {
 					tabLabel = getString(R.string.enero) + " - " + anio;
 				}
 				break;
 			case 1:
-				tabLabel = getString(R.string.febrero) + " - " + anio;
+				if ((mes >= 12)&&((position%12)<mes)) {
+					tabLabel = getString(R.string.febrero) + " - " + (anio + 1);
+//					Toast.makeText(SwipoeViews.this, "enerous", 3000).show();
+				} else {
+					tabLabel = getString(R.string.febrero) + " - " + anio;
+				}
 				break;
 			case 2:
 				tabLabel = getString(R.string.marzo) + " - " + anio;
@@ -224,13 +245,19 @@ public class SwipoeViews extends FragmentActivity {
 				tabLabel = getString(R.string.octubre) + " - " + anio;
 				break;
 			case 10:
-				tabLabel = getString(R.string.noviembre) + " - " + anio;
+				if ((mes <= 1)&&((position%12)>mes)) {
+					tabLabel = getString(R.string.noviembre) + " - "
+							+ (anio - 1);
+//					Toast.makeText(SwipoeViews.this, "diciember", 3000).show();
+				} else {
+					tabLabel = getString(R.string.noviembre) + " - " + anio;
+				}
 				break;
 			case 11:
-				if (posAnterior > position) {
+				if ((mes <= 2)&&((position%12)>mes)) {
 					tabLabel = getString(R.string.diciembre) + " - "
 							+ (anio - 1);
-					Toast.makeText(SwipoeViews.this, "diciember", 3000).show();
+//					Toast.makeText(SwipoeViews.this, "diciember", 3000).show();
 				} else {
 					tabLabel = getString(R.string.diciembre) + " - " + anio;
 				}
@@ -239,6 +266,7 @@ public class SwipoeViews extends FragmentActivity {
 
 			return tabLabel;
 		}
+		
 		private void calcularFecha(int i) {
 			if (i > posAnterior) {
 				mes++;
@@ -254,10 +282,10 @@ public class SwipoeViews extends FragmentActivity {
 					mes = 12;
 				}
 			}
-			Log.d("", "posAnt " + String.valueOf(posAnterior));
-			Log.d("", "posAct " + String.valueOf(i));
-			Log.d("", "mes " + String.valueOf(mes));
-			Log.d("", "anio " + String.valueOf(anio));
+//			Log.d("", "posAnt " + String.valueOf(posAnterior));
+//			Log.d("", "posAct " + String.valueOf(i));
+//			Log.d("", "mes " + String.valueOf(mes));
+//			Log.d("", "anio " + String.valueOf(anio));
 			posAnterior = i;
 			posActual = i;
 		}
@@ -270,8 +298,8 @@ public class SwipoeViews extends FragmentActivity {
 	public  class TabFragment extends Fragment {
 
 		public  final static String ARG_OBJECT = "object";
+		View viewRaiz;
 		View rootView;
-
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
@@ -282,14 +310,28 @@ public class SwipoeViews extends FragmentActivity {
 			int tabLayout = 0;
 			tabLayout = R.layout.activity_pantalla_principal;	
 			rootView = inflater.inflate(tabLayout, container, false);
+			viewRaiz = rootView;
+			Log.d("","## "+mes);
 			TextView ingresos = (TextView) rootView.findViewById(R.id.montoIngresos);
-			ingresos.setText(String.valueOf(args.getInt("ingresos")));
+			ingresos.setText(String.valueOf(args.getFloat("ingresos")));
+			Log.d("",String.valueOf(args.getFloat("ingresos")));
 			TextView gastos = (TextView) rootView.findViewById(R.id.montoGastos);
-			gastos.setText(String.valueOf(args.getInt("gastos")));
+			gastos.setText(String.valueOf(args.getFloat("gastos")));
+			Log.d("",String.valueOf(args.getFloat("gastos")));
 			TextView disponible = (TextView) rootView.findViewById(R.id.montoDisponible);
-			disponible.setText(String.valueOf(args.getInt("disponible")));
+			disponible.setText(String.valueOf(args.getFloat("disponible")));
+			Log.d("",String.valueOf(args.getFloat("disponible")));
 			return rootView;
 		}
+		public void setArgs(float ingresos, float gastos, float disponible){
+			TextView ingresosLocal = (TextView) viewRaiz.findViewById(R.id.montoIngresos);
+			ingresosLocal.setText(String.valueOf(ingresos));
+			TextView gastosLocal = (TextView) viewRaiz.findViewById(R.id.montoGastos);
+			gastosLocal.setText(String.valueOf(gastos));
+			TextView disponibleLocal = (TextView) viewRaiz.findViewById(R.id.montoDisponible);
+			disponibleLocal.setText(String.valueOf(disponible));
+		}
+		
 	}
 	
 	public void SetMoneda(View view){
