@@ -334,24 +334,7 @@ public class SwipoeViews extends FragmentActivity {
 		
 	}
 	
-	public void SetMoneda(View view){
-		if(estaEnDolares){			
-			estaEnDolares = false;		
-		}else{
-			estaEnDolares = true;
-		}
-		SetTextMoneda();
-	}
 	
-	
-	public void SetTextMoneda(){
-		Button button = (Button) findViewById(R.id.CMoneda);
-		if(estaEnDolares){					
-			button.setText(R.string.colones);			
-		}else{
-			button.setText(R.string.dolares);
-		}
-	}
 	
 	@SuppressWarnings("deprecation")
 	public void cargarDetalles(View view) {
@@ -434,6 +417,23 @@ public class SwipoeViews extends FragmentActivity {
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 	}
 	
+	public void SetMoneda(View view){
+		if(estaEnDolares){			
+			estaEnDolares = false;		
+		}else{
+			estaEnDolares = true;
+		}
+		SetTextMoneda();
+	}
 	
+	
+	public void SetTextMoneda(){
+		Button button = (Button) findViewById(R.id.CMoneda);
+		if(estaEnDolares){					
+			button.setText(R.string.colones);			
+		}else{
+			button.setText(R.string.dolares);
+		}
+	}
 
 }
