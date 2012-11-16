@@ -26,6 +26,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -269,6 +270,7 @@ public class SwipoeViews extends FragmentActivity {
 	public  class TabFragment extends Fragment {
 
 		public  final static String ARG_OBJECT = "object";
+		View rootView;
 
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -279,7 +281,7 @@ public class SwipoeViews extends FragmentActivity {
 			
 			int tabLayout = 0;
 			tabLayout = R.layout.activity_pantalla_principal;	
-			View rootView = inflater.inflate(tabLayout, container, false);
+			rootView = inflater.inflate(tabLayout, container, false);
 			TextView ingresos = (TextView) rootView.findViewById(R.id.montoIngresos);
 			ingresos.setText(String.valueOf(args.getInt("ingresos")));
 			TextView gastos = (TextView) rootView.findViewById(R.id.montoGastos);
@@ -288,9 +290,27 @@ public class SwipoeViews extends FragmentActivity {
 			disponible.setText(String.valueOf(args.getInt("disponible")));
 			return rootView;
 		}
-		
 	}
-
+	
+	public void SetMoneda(View view){
+		if(estaEnDolares){			
+			estaEnDolares = false;		
+		}else{
+			estaEnDolares = true;
+		}
+		SetTextMoneda();
+	}
+	
+	
+	public void SetTextMoneda(){
+		Button button = (Button) findViewById(R.id.CMoneda);
+		if(estaEnDolares){					
+			button.setText(R.string.colones);			
+		}else{
+			button.setText(R.string.dolares);
+		}
+	}
+	
 	@SuppressWarnings("deprecation")
 	public void cargarDetalles(View view) {
 		AlertDialog alertDialog = new AlertDialog.Builder(this).create();
@@ -371,16 +391,7 @@ public class SwipoeViews extends FragmentActivity {
 		super.onConfigurationChanged(newConfig);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 	}
+	
+	
 
-	// public int calcularAnio(){
-	// Log.d("","Inicial"+String.valueOf(posInicial));
-	// int resp;
-	// if(mCollectionPagerAdapter.posActual != -1){
-	// resp = (mes+(mCollectionPagerAdapter.posActual - posInicial)/12);
-	// }
-	// else{
-	// resp = 0;
-	// }
-	// return resp;
-	// }
 }
