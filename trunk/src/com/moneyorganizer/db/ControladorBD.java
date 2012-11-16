@@ -472,4 +472,67 @@ public class ControladorBD implements ConstantesBD {
 		}
 		return false;
 	}
+	
+	public float getTotalGastosDelMes(int mes, int anio) {
+		SQLiteDatabase db = openHelper.getReadableDatabase();
+		float total = 0;
+		Cursor cursor = db.query(TABLA_GASTOS, new String[] {
+				ColumnaGastos.ID,ColumnaGastos.MONTO}, ColumnaGastos.MES + "= ? AND "+ ColumnaGastos.ANIO + "= ?",
+				new String[] { String.valueOf(mes), String.valueOf(anio) }, null, null, null);
+		if (cursor.moveToFirst()) {
+			do {
+				total = total + Float.parseFloat(cursor.getString(cursor
+						.getColumnIndex(ColumnaGastos.MONTO)));
+			} while (cursor.moveToNext());
+		}
+		cursor.close();
+		db.close();
+		return total;
+	}
+	
+	public float getTotalIngresosDelMes(int mes, int anio) {
+		SQLiteDatabase db = openHelper.getReadableDatabase();
+		float total = 0;
+		Cursor cursor = db.query(TABLA_INGRESOS, new String[] {
+				ColumnaIngresos.ID,ColumnaIngresos.MONTO}, ColumnaIngresos.MES + "= ? AND "+ ColumnaIngresos.ANIO + "= ?",
+				new String[] { String.valueOf(mes), String.valueOf(anio) }, null, null, null);
+		if (cursor.moveToFirst()) {
+			do {
+				total = total + Float.parseFloat(cursor.getString(cursor
+						.getColumnIndex(ColumnaIngresos.MONTO)));
+			} while (cursor.moveToNext());
+		}
+		cursor.close();
+		db.close();
+		return total;
+	}
+	
+	public float getDisponible(){
+		SQLiteDatabase db = openHelper.getReadableDatabase();
+		float total = 0;
+		Cursor cursor;
+		cursor = db.query(TABLA_INGRESOS, new String[] {
+				ColumnaIngresos.ID,ColumnaIngresos.MONTO}, null,
+				null, null, null, null);
+		if (cursor.moveToFirst()) {
+			do {
+				total = total + Float.parseFloat(cursor.getString(cursor
+						.getColumnIndex(ColumnaIngresos.MONTO)));
+			} while (cursor.moveToNext());
+		}
+		cursor.close();
+		
+		cursor = db.query(TABLA_GASTOS, new String[] {
+				ColumnaGastos.ID,ColumnaGastos.MONTO}, null,
+				null, null, null, null);
+		if (cursor.moveToFirst()) {
+			do {
+				total = total - Float.parseFloat(cursor.getString(cursor
+						.getColumnIndex(ColumnaGastos.MONTO)));
+			} while (cursor.moveToNext());
+		}
+		cursor.close();
+		db.close();
+		return total;
+	}
 }

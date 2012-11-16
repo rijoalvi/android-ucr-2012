@@ -35,4 +35,6 @@
     <string name="noviembre">Noviembre</string>
     <string name="diciembre">Diciembre</string>
     <string name="title_activity_barra_inferior">BarraInferior</string>
+    <string name="colones">Colones</string>
+    <string name="dolares">Dolares</string>
 </resources>
