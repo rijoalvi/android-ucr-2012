@@ -27,7 +27,7 @@
             android:onClick="SetMoneda"
             android:layout_height="33dp"
             android:layout_alignParentRight="true" 
-             android:text="moneda" />
+             android:text="@string/colones" />
     </RelativeLayout>
     
 
