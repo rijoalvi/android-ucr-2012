@@ -13,8 +13,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
-import android.content.res.Configuration;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -38,12 +36,20 @@ public class TotalDeIngresos extends Activity {
 	ControladorBD controlador;
 	private float tipoDeCambio;
 	private boolean estaEnDolares;
+	ListView listaIngresos;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_total_de_ingresos);
-		ListView listaIngresos = (ListView) findViewById(R.id.lista_ingresos);
+		listaIngresos = (ListView) findViewById(R.id.lista_ingresos);
+		Object obj = getLastNonConfigurationInstance();
+		List<Ingreso> ingresos = null;
+		if (obj != null) {
+			ingresos = (List<Ingreso>) obj;
+		} else {
+			ingresos = new ArrayList<Ingreso>();
+		}
 		listaIngresos.setAdapter(new IngresoAdapter(this,
 				new ArrayList<Ingreso>()));
 		listaIngresos.setOnItemLongClickListener(new OnItemLongClickListener() {
@@ -311,8 +317,7 @@ public class TotalDeIngresos extends Activity {
 	}
 
 	@Override
-	public void onConfigurationChanged(Configuration newConfig) {
-		super.onConfigurationChanged(newConfig);
-		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+	public Object onRetainNonConfigurationInstance() {
+		return ((IngresoAdapter) listaIngresos.getAdapter()).getIngresos();
 	}
 }
