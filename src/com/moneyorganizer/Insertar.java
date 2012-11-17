@@ -323,6 +323,17 @@ public class Insertar {
 		unIngreso.setDia(20);
 		unIngreso.setMes(9);
 		unIngreso.setMonto(1300);
+		unIngreso.setDetalle("Loteria");
+		unIngreso.setFuente("Loteria");
+		controlador.guardarIngreso(unIngreso);
+
+		
+		unIngreso = new Ingreso();
+		unIngreso.setTipo(6);
+		unIngreso.setAnio(2012);
+		unIngreso.setDia(20);
+		unIngreso.setMes(9);
+		unIngreso.setMonto(1300);
 		unIngreso.setDetalle("Me encontre Plata");
 		unIngreso.setFuente("Loteria");
 		controlador.guardarIngreso(unIngreso);
@@ -365,6 +376,16 @@ public class Insertar {
 		unIngreso.setMes(7);
 		unIngreso.setMonto(1600);
 		unIngreso.setDetalle("");
+		unIngreso.setFuente("Regalo");
+		controlador.guardarIngreso(unIngreso);
+		
+		unIngreso = new Ingreso();
+		unIngreso.setTipo(3);
+		unIngreso.setAnio(2012);
+		unIngreso.setDia(20);
+		unIngreso.setMes(7);
+		unIngreso.setMonto(1600);
+		unIngreso.setDetalle("Negocios");
 		unIngreso.setFuente("Regalo");
 		controlador.guardarIngreso(unIngreso);
 		
