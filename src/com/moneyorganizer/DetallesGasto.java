@@ -111,7 +111,7 @@ public class DetallesGasto extends Activity {
 		@Override
 		protected void onPostExecute(Boolean result) {
 			if (result != null && result) {
-				String mensaje = "Gasto guardado con ƒxito";
+				String mensaje = "Gasto guardado con exito";
 				Toast.makeText(DetallesGasto.this, mensaje, Toast.LENGTH_SHORT)
 						.show();
 			}
