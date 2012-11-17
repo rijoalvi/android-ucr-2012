@@ -11,8 +11,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
-import android.content.res.Configuration;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -35,13 +33,22 @@ public class TotalDeGastos extends Activity {
 
 	private float tipoDeCambio;
 	private boolean estaEnDolares;
+	
+	ListView listaGastos;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_total_de_gastos);
 
-		ListView listaGastos = (ListView) findViewById(R.id.lista_gastos);
+		listaGastos = (ListView) findViewById(R.id.lista_gastos);
+		Object obj = getLastNonConfigurationInstance();
+		List<Gasto> gastos = null;
+		if (obj != null) {
+			gastos = (List<Gasto>) obj;
+		} else {
+			gastos = new ArrayList<Gasto>();
+		}
 		listaGastos.setAdapter(new GastoAdapter(this, new ArrayList<Gasto>()));
 		listaGastos.setOnItemLongClickListener(new OnItemLongClickListener() {
 
@@ -52,8 +59,8 @@ public class TotalDeGastos extends Activity {
 						position);
 				AlertDialog.Builder builder = new AlertDialog.Builder(
 						TotalDeGastos.this);
-				builder.setTitle("¡Atención!");
-				builder.setMessage("¿Está seguro de que desea borrar este gasto?");
+				builder.setTitle("Atencion!");
+				builder.setMessage("Esta seguro de que desea borrar este gasto?");
 				builder.setPositiveButton("Si",
 						new DialogInterface.OnClickListener() {
 							@Override
@@ -297,10 +304,9 @@ public class TotalDeGastos extends Activity {
 		}
 
 	}
-
+	
 	@Override
-	public void onConfigurationChanged(Configuration newConfig) {
-		super.onConfigurationChanged(newConfig);
-		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+	public Object onRetainNonConfigurationInstance() {
+		return ((GastoAdapter) listaGastos.getAdapter()).getGastos();
 	}
 }
